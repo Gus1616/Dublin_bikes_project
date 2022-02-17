@@ -22,6 +22,12 @@ sql = '''
 CREATE DATABASE IF NOT EXISTS dbikes;
 '''
 engine.execute(sql)
+
+
+sql2='''
+CREATE DATABASE  IF NOT EXISTS dbikes;
+'''
+engine.execute(sql2)
 for res in engine.execute("SHow Variables;"):
     print(res)
 
@@ -51,7 +57,6 @@ CREATE TABLE IF NOT EXISTS availability (
 number INTEGER,
 available_bike_stands INTEGER,
 available_bikes INTEGER,
-status VARCHAR(256),
 last_update DATETIME
 
 )
@@ -68,33 +73,23 @@ r = requests.get("https://api.jcdecaux.com/vls/v1/stations?contract=dublin&apiKe
 print(r)
 r.json()
 
-
-
-
-
-
-def write_to_file(text):
-    with open ("data/bikes_{}".format(now).replace(" ", "_", "w")) as f:
-        f.write(r.text)
-
-
-# def stations_to_db(text):
-#     stations = json.loads(text)
-#     print(stations)
-#     print(type(stations), len(stations))
-#     for station in stations:
-#         print(station)
-#         vals = [station.get("address"),int(station.get("banking")),
-#                station.get("bike_stands"),(station.get("address")),
-#                 station.get("contract_name"),station.get("name"),
-#                 station.get("number"),station.get("position").get("lat"),
-#                station.get("position").get("lng"), station.get("status")]
+def stations_to_db(text):
+    stations = json.loads(text)
+    print(stations)
+    print(type(stations), len(stations))
+    for station in stations:
+        print(station)
+        vals = [station.get("address"),int(station.get("banking")),
+               station.get("bike_stands"),(station.get("address")),
+                station.get("contract_name"),station.get("name"),
+                station.get("number"),station.get("position").get("lat"),
+               station.get("position").get("lng"), station.get("status")]
        
-#         engine.execute("insert into station values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",vals)
+        engine.execute("insert into station values (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)",vals)
 
 
-#     return
-# stations_to_db(r.text)
+    return
+stations_to_db(r.text)
 
 
 def stations_to_db2(text):
@@ -106,13 +101,13 @@ def stations_to_db2(text):
 
         vals2 = [station.get("number"), station.get("available_bikes"),
         station.get("available_bike_stands"), station.get("last_update")]
-        timestamp = vals2[3]/1000
-        vals2[3] = dt_object = datetime.fromtimestamp(timestamp)
+        timestamp = int(vals2[3]/1000)
+        vals2[3] = datetime.fromtimestamp(timestamp)
         engine.execute("insert into availability values(%s,%s,%s,%s)", vals2)
 
 
 
-stations_to_db2(r.text)
+
 def main():
     while True:
         try:
