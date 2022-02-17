@@ -114,7 +114,7 @@ def main():
             r = requests.get("https://api.jcdecaux.com/vls/v1/stations?contract=dublin&apiKey=0d101d6645f441b34490f9530a0f91c869debe77")
             stations_to_db2(r.text)
             print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-            time.sleep(5*2)
+            time.sleep(5*60)
 
             return
         except:
