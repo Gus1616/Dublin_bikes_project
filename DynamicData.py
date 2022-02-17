@@ -13,11 +13,11 @@ import datetime
 import time
 
 
-URI = "dbikes2.cmd8vuwgew1e.us-east-1.rds.amazonaws.com"
+URI = "database-1.cmd8vuwgew1e.us-east-1.rds.amazonaws.com"
 PORT = "3306"
 DB = "dbikes"
 USER = "admin"
-PASSWORD = "Dublin123"
+PASSWORD = "Apples123"
 
 
 engine = create_engine("mysql+mysqldb://{}:{}@{}:{}/{}".format(USER, PASSWORD, URI, PORT, DB), echo=True)
@@ -30,9 +30,9 @@ def write_to_file(text):
 def write_to_db(text):
     stations = json.loads(text)
     for station in stations:
-        vals = [station.get("number"), station.get("available_bikes"),
+        vals2 = [station.get("number"), station.get("available_bikes"),
                 station.get("available_bike_stands"), station.get("last_update")]
-        engine.execute("insert into availability values(%s,%s,%s,%s)", vals)
+        engine.execute("insert into availability values(%s,%s,%s,%s)", vals2)
 
     
     return
