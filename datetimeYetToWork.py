@@ -22,6 +22,12 @@ sql = '''
 CREATE DATABASE IF NOT EXISTS dbikes;
 '''
 engine.execute(sql)
+# aaa
+
+sql2='''
+CREATE DATABASE  IF NOT EXISTS dbikes;
+'''
+engine.execute(sql2)
 for res in engine.execute("SHow Variables;"):
     print(res)
 
@@ -51,7 +57,6 @@ CREATE TABLE IF NOT EXISTS availability (
 number INTEGER,
 available_bike_stands INTEGER,
 available_bikes INTEGER,
-status VARCHAR(256),
 last_update DATETIME
 
 )
@@ -67,16 +72,6 @@ import requests
 r = requests.get("https://api.jcdecaux.com/vls/v1/stations?contract=dublin&apiKey=0d101d6645f441b34490f9530a0f91c869debe77")
 print(r)
 r.json()
-
-
-
-
-
-
-# def write_to_file(text):
-#     with open ("data/bikes_{}".format(now).replace(" ", "_", "w")) as f:
-#         f.write(r.text)
-
 
 def stations_to_db(text):
     stations = json.loads(text)
@@ -106,20 +101,20 @@ def stations_to_db2(text):
 
         vals2 = [station.get("number"), station.get("available_bikes"),
         station.get("available_bike_stands"), station.get("last_update")]
-        timestamp = vals2[3]/1000
-        vals2[3] = dt_object = datetime.datetime.fromtimestamp(timestamp)
+        timestamp = int(vals2[3]/1000)
+        vals2[3] = datetime.fromtimestamp(timestamp)
         engine.execute("insert into availability values(%s,%s,%s,%s)", vals2)
 
 
 
-stations_to_db2(r.text)
+
 def main():
     while True:
         try:
             r = requests.get("https://api.jcdecaux.com/vls/v1/stations?contract=dublin&apiKey=0d101d6645f441b34490f9530a0f91c869debe77")
             stations_to_db2(r.text)
             print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-            time.sleep(5*2)
+            time.sleep(5*60)
 
             return
         except:
@@ -127,9 +122,13 @@ def main():
             continue
 
 if __name__ == '__main__':
-    main()
+    while True:
+        try:
+            main()
+        except:
+            print(traceback.format_exc())
 
+            
 
 
 metadata = sqla.MetaData()
-
