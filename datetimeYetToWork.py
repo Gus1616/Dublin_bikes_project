@@ -128,7 +128,7 @@ if __name__ == '__main__':
         except:
             print(traceback.format_exc())
 
-        time.sleep(5*2)
+            
 
 
 metadata = sqla.MetaData()
