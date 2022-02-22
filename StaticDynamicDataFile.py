@@ -71,9 +71,9 @@ import datetime
 import time
 
 
-def write_to_file(text):
-    with open ("data/bikes_{}".format(now).replace(" ", "_", "w")) as f:
-        f.write(r.text)
+# def write_to_file(text):
+#     with open ("data/bikes_{}".format(now).replace(" ", "_", "w")) as f:
+#         f.write(r.text)
 
 # def write_to_db(text):
 #     stations = json.loads(text)
