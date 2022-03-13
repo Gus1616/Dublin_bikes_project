@@ -7,18 +7,13 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
-    <!--    <link rel="stylesheet" type="text/css" href="./style.css" />-->
-    <!-- <script src="{{ url_for('static',filename='index1.js')}}"></script> -->
+    
     <style>
         /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
-        #map {
-            margin-top: 200px;
-            height: 50%;
-        }
+        
 
         /* Optional: Makes the sample page fill the window. */
         html,
@@ -53,22 +48,8 @@
             </div>
         </div>
     </nav>
-    <h2>Dublin Bikes</h2>
-    <select id="textbox"></select>
-    <div id="map"></div>
-
+    <h2>About the app</h2>
     
-<!-- Connecting to the flask app -->
-    <script src="{{ url_for('static',filename='index1.js')}}"></script>
 
-
-    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb8zXbwKXBxIng1urDIW4BvTS6Yon8i0I&callback=initMap&v=weekly" async></script>
-
-    <footer class="container-fluid text-center">
-
-        <p>End of website</p>
-    </footer>
 </body>
-
 </html>

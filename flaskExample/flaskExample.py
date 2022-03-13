@@ -21,32 +21,40 @@ def home():
     return render_template('index.html')
 
 
+@app.route("/about")
+def about():
+    return render_template('about.html')
+
+
 @app.route("/stations")
 def get_stations():
-    print("Calling stations")
-    # engine = create_engine("mysql+mysqldb://{}:{}@{}:{}/{}".format(USER, PASSWORD, URL, PORT, DB), echo=True)
-    # sql = "select * from station;"
-    df = pd.read_sql_table("station", engine)
-    # rows = engine.execute(sql).fetchall()
-    # print('#found {} stajtions',len(rows))
-    # return jsonify(stations=[dict(row.items()) for row in rows])
-
+    engine = create_engine("mysql+mysqldb://{}:{}@{}:{}/{}".format(USER, PASSWORD, URL, PORT, DB), echo=True)
+    # query to join stations and availbility table. 
+    sql_query_stations= """
+        SELECT station.address,station.bike_stands, station.name, station.position_lat,station.position_lng,station.status, avail.available_bike_stands, avail.available_bikes, avail.last_update
+        FROM station, availability avail
+        INNER JOIN
+            (
+            SELECT number, max(last_update) as last_update
+            FROM availability 
+            GROUP BY number
+            ) select_avail
+            ON avail.number = select_avail.number AND avail.last_update = select_avail.last_update
+        WHERE station.number = avail.number
+        ORDER BY station.name ASC;  
+    
+    """
+    df = pd.read_sql_query(sql_query_stations, engine)
     results = df.to_json(orient='records')
-    # print(results)
     return results
 
 @ app.route('/availability')
 def get_availability():
     print("Calling availability")
-    # engine = create_engine("mysql+mysqldb://{}:{}@{}:{}/{}".format(USER, PASSWORD, URL, PORT, DB), echo=True)
-    # sql = "select * from station;"
+    engine = create_engine("mysql+mysqldb://{}:{}@{}:{}/{}".format(USER, PASSWORD, URL, PORT, DB), echo=True)
     df = pd.read_sql_table("availability", engine)
-    # rows = engine.execute(sql).fetchall()
-    # print('#found {} stajtions',len(rows))
-    # return jsonify(stations=[dict(row.items()) for row in rows])
 
     results = df.to_json(orient='records')
-    # print(results)
     return results
 
 if __name__== "__main__":
