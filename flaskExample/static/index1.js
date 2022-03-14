@@ -78,10 +78,15 @@ function initMap() {
         makeClickable(map, circle, displayInfo);
         })        
 
-        fetch("/availability")
+        fetch("/current_weather")
           .then((response) => {
             return response.json();
-          }).then(data=> {
+          }).then(function (data) {
+            // console.log("here is the weather", data)
+            // appendData(data);
+            // for (var i = 0; i < data.length; i++) {
+            //   console.log(i)
+            // }
               
 
     });
@@ -111,4 +116,30 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     );
     infoWindow.open(map);
   }
+
+  fetch("/current_weather")
+  .then(function (response) {
+      return response.json();
+  })
+  .then(function (data) {
+      appendData(data);
+      console.log(data)
+  })
+  .catch(function (err) {
+      console.log('error: ' + err);
+  });
+function appendData(data) {
+  var mainContainer = document.getElementById("myData");
+  console.log("data lenght ", data.length)
+  // for (var i = 0; i < data.length;i++) 
+  var div = document.createElement("div");
+  div.innerHTML = 'Description: ' + data[0].description1 + '</br>' + 'temp: '+data[0].temperature+ '</br>' + 'Wind Speed: '+data[0].windspeed;
+  mainContainer.appendChild(div);
   
+}
+
+
+
+  
+
+ 

@@ -11,7 +11,6 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
     <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
     <!--    <link rel="stylesheet" type="text/css" href="./style.css" />-->
-    <!-- <script src="{{ url_for('static',filename='index1.js')}}"></script> -->
     <style>
         /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
@@ -19,6 +18,52 @@
             margin-top: 200px;
             height: 50%;
         }
+
+        div.widget{
+  position: relative;
+  width: 355px;
+  height: 125px;
+  margin: 150px auto;
+  background-color: #fcfdfd;
+  border-radius: 9px;
+  padding: 25px;
+  padding-right: 30px;
+  box-shadow: 0px 31px 35px -26px #080c21;
+}
+
+
+div.date{
+  font-size: 14px;
+  font-weight: bold;
+  color: rgba(0,0,0,0.5);
+}
+
+div.city{
+  font-size: 21px;
+  font-weight: bold;
+  text-transform: uppercase;
+  padding-top: 5px;
+  color: rgba(0,0,0,0.7);
+}
+
+div.temp{
+  font-size: 81px;
+  color: rgba(0,0,0,0.9);
+  font-weight: 100;
+}
+
+div.panel
+{
+  display: inline-block;
+}
+
+div.right-panel{
+  position: absolute;
+  float: right;
+  top: 0;
+  margin-top: 35px;
+  padding-left: 10px;
+}
 
         /* Optional: Makes the sample page fill the window. */
         html,
@@ -47,8 +92,8 @@
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="{{ url_for('home') }}">Home</a></li>
                     <li><a href="{{ url_for('about') }}">About</a></li>
-                    <li><a href="#">Weather</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="{{ url_for('info_weather') }}">Weather</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
                 </ul>
             </div>
         </div>
@@ -56,6 +101,29 @@
     <h2>Dublin Bikes</h2>
     <select id="textbox"></select>
     <div id="map"></div>
+
+
+    <div class="widget">
+            
+        <div class="left-panel panel">
+            <div class="date">
+                Monday, 20 Aug 2018
+            </div>
+            <div class="city">
+                Dublin
+            </div>
+            <div class="temp">
+               <img src="https://s5.postimg.cc/yzcm7htyb/image.png" alt="" width="60">
+               27&deg;
+            </div>
+        </div>
+        <div class="right-panel panel">
+            <img src="https://s5.postimg.cc/lifnombwz/mumbai1.png" alt="" width="160">
+        </div>
+
+    </div>
+
+<div id="myData"></div>
 
     
 <!-- Connecting to the flask app -->

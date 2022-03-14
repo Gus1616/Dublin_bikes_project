@@ -25,6 +25,15 @@ def home():
 def about():
     return render_template('about.html')
 
+@app.route("/info_weather")
+def info_weather():
+    return render_template('info_weather.html')
+
+
+@app.route("/contact")
+def contact():
+    return render_template('contact.html')
+
 
 @app.route("/stations")
 def get_stations():
@@ -50,9 +59,19 @@ def get_stations():
 
 @ app.route('/availability')
 def get_availability():
-    print("Calling availability")
     engine = create_engine("mysql+mysqldb://{}:{}@{}:{}/{}".format(USER, PASSWORD, URL, PORT, DB), echo=True)
     df = pd.read_sql_table("availability", engine)
+    results = df.to_json(orient='records')
+    return results
+
+@ app.route('/current_weather')
+def get_weather():
+    engine = create_engine("mysql+mysqldb://{}:{}@{}:{}/{}".format(USER, PASSWORD, URL, PORT, DB), echo=True)
+    sql_query_weather= """
+    SELECT * FROM weather ORDER BY ID DESC LIMIT 1;
+    """
+    df = pd.read_sql_query(sql_query_weather, engine)
+    # df = pd.read_sql_query("weather", engine)
 
     results = df.to_json(orient='records')
     return results
