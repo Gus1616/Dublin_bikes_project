@@ -7,8 +7,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+
+<!-- 
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
-    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script> -->
     
     <style>
         /* Always set the map height explicitly to define the size of the div
@@ -16,13 +18,13 @@
         
 
         /* Optional: Makes the sample page fill the window. */
-        html,
+        /* html,
         body {
             height: 100%;
             width: auto;
             margin: 0;
             padding: 0;
-        }
+        } */
 
     </style>
 </head>
@@ -48,8 +50,41 @@
             </div>
         </div>
     </nav>
-    <h2>About the app</h2>
-    
+    <h2>Weather</h2>
+
+    <!-- <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-offset-4 is-4">
+                    {% for weather in weather_data %}
+                    <div class="box">
+                        <article class="media">
+                            <div class="media-left">
+                                <figure class="image is-50x50">
+                                    <img src="http://openweathermap.org/img/w/{{ weather.icon }}.png" alt="Image">
+                                </figure>
+                            </div>
+                            <div class="media-content">
+                                <div class="content">
+                                    <p>
+                                        <span class="title">Hello</span>
+                                        <br>
+                                        <span class="subtitle">{{ weather.temperature }}° F</span>
+                                        <br> {{ weather.description }}
+                                    </p>
+                                </div>
+                            </div>
+                        </article>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+
+     -->
+<script src="{{ url_for('static',filename='index1.js')}}"></script>
+
 
 </body>
 </html>
