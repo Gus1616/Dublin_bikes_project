@@ -122,21 +122,37 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
       return response.json();
   })
   .then(function (data) {
-      appendData(data);
+      // appendData(data);
       console.log(data)
+      var mainContainer = document.getElementById("weatherTemp");
+      var div = document.createElement("div");
+      div.innerHTML = data[0].temperature;
+      mainContainer.appendChild(div);
+
+      
+
+      var descriptionContainer = document.getElementById("description");
+      var descriptionDiv = document.createElement("descriptionDiv");
+      descriptionDiv.innerHTML = data[0].description1;
+      descriptionContainer.appendChild(descriptionDiv);
   })
   .catch(function (err) {
       console.log('error: ' + err);
   });
-function appendData(data) {
-  var mainContainer = document.getElementById("myData");
-  console.log("data lenght ", data.length)
-  // for (var i = 0; i < data.length;i++) 
-  var div = document.createElement("div");
-  div.innerHTML = 'Description: ' + data[0].description1 + '</br>' + 'temp: '+data[0].temperature+ '</br>' + 'Wind Speed: '+data[0].windspeed;
-  mainContainer.appendChild(div);
+// function appendData(data) {
+//   var mainContainer = document.getElementById("weatherTemp");
+//   var div = document.createElement("div");
+//   div.innerHTML = data[0].temperature;
+//   mainContainer.appendChild(div);
+
+
+//   var descriptionContainer = document.getElementById("description");
+//   var descriptionDiv = document.createElement("descriptionDiv");
+//   descriptionDiv.innerHTML = data[0].description1;
+//   descriptionContainer.appendChild(descriptionDiv);
+
   
-}
+// }
 
 
 
