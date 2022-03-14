@@ -1,3 +1,21 @@
+// SELECT ELEMENTS
+const iconElement = document.querySelector(".weather-icon");
+const tempElement = document.querySelector(".temperature-value p");
+const descElement = document.querySelector(".weather-description p");
+const windElement = document.querySelector(".wind-speed p");
+
+
+
+
+const weather = {};
+
+console.log("weatherr", weather)
+console.log("weatherrrrrr", iconElement)
+
+
+
+
+
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         center: new google.maps.LatLng(53.350140, -6.266155),
@@ -87,6 +105,7 @@ function initMap() {
             // for (var i = 0; i < data.length; i++) {
             //   console.log(i)
             // }
+            
               
 
     });
@@ -123,36 +142,45 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
   })
   .then(function (data) {
       // appendData(data);
-      console.log(data)
-      var mainContainer = document.getElementById("weatherTemp");
-      var div = document.createElement("div");
-      div.innerHTML = data[0].temperature;
-      mainContainer.appendChild(div);
+      // console.log(data)
+      // var mainContainer = document.getElementById("weatherTemp");
+      // var div = document.createElement("div");
+      // div.innerHTML = data[0].temperature;
+      // mainContainer.appendChild(div);
 
       
 
-      var descriptionContainer = document.getElementById("description");
-      var descriptionDiv = document.createElement("descriptionDiv");
-      descriptionDiv.innerHTML = data[0].description1;
-      descriptionContainer.appendChild(descriptionDiv);
+      // var descriptionContainer = document.getElementById("description");
+      // var descriptionDiv = document.createElement("descriptionDiv");
+      // descriptionDiv.innerHTML = data[0].description1;
+      // descriptionContainer.appendChild(descriptionDiv);
+
+          weather.temperature = Math.floor(data[0].temperature- 273);
+          weather.description = data[0].description1;
+          weather.iconId = data[0].icon;
+          weather.windspeed = data[0].windspeed;
+          console.log("hello", weather.temperature)
+          console.log("helllllo", weather.description)
+
+
+
   })
-  .catch(function (err) {
-      console.log('error: ' + err);
-  });
-// function appendData(data) {
-//   var mainContainer = document.getElementById("weatherTemp");
-//   var div = document.createElement("div");
-//   div.innerHTML = data[0].temperature;
-//   mainContainer.appendChild(div);
-
-
-//   var descriptionContainer = document.getElementById("description");
-//   var descriptionDiv = document.createElement("descriptionDiv");
-//   descriptionDiv.innerHTML = data[0].description1;
-//   descriptionContainer.appendChild(descriptionDiv);
-
+  .then(function(){
+    displayWeather();
   
-// }
+});
+
+
+
+function displayWeather(){
+  iconElement.innerHTML = `<img src="http://openweathermap.org/img/w/${weather.iconId}.png"/>`;
+  tempElement.innerHTML = `${weather.temperature}°<span>C</span>`;
+  descElement.innerHTML = weather.description;
+  windElement.innerHTML = `<span>Wind: </span>${weather.windspeed }<span>Km/h</span>`;
+}
+
+
+
 
 
 
