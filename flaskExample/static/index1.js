@@ -5,26 +5,24 @@ const descElement = document.querySelector(".weather-description p");
 const windElement = document.querySelector(".wind-speed p");
 
 
-
-
+// variable to hold weather
 const weather = {};
 
-console.log("weatherr", weather)
-console.log("weatherrrrrr", iconElement)
-
-
-
-
-
+// intialise the map function
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
         center: new google.maps.LatLng(53.350140, -6.266155),
         zoom: 14,
     });
 
+   
+// pop up window variable
     infoWindow = new google.maps.InfoWindow();
+
 // code to get current location
   const locationButton = document.createElement("button");
+
+
 
   locationButton.textContent = "Pan to Current Location";
   locationButton.classList.add("custom-map-control-button");
@@ -55,13 +53,14 @@ function initMap() {
   });
 
 
+// fetch function to get stations data 
 
     fetch("/stations").then(response => {
         return response.json();
     }).then((json) => {
+      // looping through each station then adding data to the map
         json.forEach(station => {
             var color = 'Blue';
-            // console.log('HEllo')
             fill1 = "<option value=";
             fill2 = ">";
             let text = "<select>";
@@ -100,14 +99,7 @@ function initMap() {
           .then((response) => {
             return response.json();
           }).then(function (data) {
-            // console.log("here is the weather", data)
-            // appendData(data);
-            // for (var i = 0; i < data.length; i++) {
-            //   console.log(i)
-            // }
             
-              
-
     });
 
 });
@@ -136,25 +128,13 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     infoWindow.open(map);
   }
 
+ // fetching the current weather 
   fetch("/current_weather")
   .then(function (response) {
       return response.json();
   })
   .then(function (data) {
-      // appendData(data);
-      // console.log(data)
-      // var mainContainer = document.getElementById("weatherTemp");
-      // var div = document.createElement("div");
-      // div.innerHTML = data[0].temperature;
-      // mainContainer.appendChild(div);
-
-      
-
-      // var descriptionContainer = document.getElementById("description");
-      // var descriptionDiv = document.createElement("descriptionDiv");
-      // descriptionDiv.innerHTML = data[0].description1;
-      // descriptionContainer.appendChild(descriptionDiv);
-
+      // assigning variable to the necessary objects in the JSON 
           weather.temperature = Math.floor(data[0].temperature- 273);
           weather.description = data[0].description1;
           weather.iconId = data[0].icon;
@@ -166,12 +146,13 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 
   })
   .then(function(){
+    // function to display the weather
     displayWeather();
   
 });
 
 
-
+// function to pass through the JSON as readable HTML objects. 
 function displayWeather(){
   iconElement.innerHTML = `<img src="http://openweathermap.org/img/w/${weather.iconId}.png"/>`;
   tempElement.innerHTML = `${weather.temperature}°<span>C</span>`;
