@@ -19,50 +19,72 @@
             height: 50%;
         }
 
-        div.widget{
-  position: relative;
-  width: 355px;
-  height: 125px;
-  margin: 150px auto;
-  background-color: #fcfdfd;
-  border-radius: 9px;
-  padding: 25px;
-  padding-right: 30px;
-  box-shadow: 0px 31px 35px -26px #080c21;
-}
+
+/* CSS for moving weather data adapted from https://codehasbug.com/css/create-3-types-horizontal-vertical-news-ticker-html-css/ */
+        .ticker-wrapper-h{
+	        display: flex;	
+	        position: relative;
+	        overflow: hidden;
+	        border: 1px solid #1c6547;
+        }
+
+        .ticker-wrapper-h .heading{
+	        background-color: #1c6547;
+	        color: #fff;
+	        padding: 5px 10px;
+	        flex: 0 0 auto;
+	        z-index: 1000;
+        }
+        .ticker-wrapper-h .heading:after{
+	        content: "";
+	        position: absolute;
+	        top: 0;
+	        border-left: 20px solid #1c6547;
+	        border-top: 17px solid transparent;
+	        border-bottom: 15px solid transparent;
+        }
 
 
-div.date{
-  font-size: 14px;
-  font-weight: bold;
-  color: rgba(0,0,0,0.5);
-}
+        .news-ticker-h{
+	        display: flex;
+	        margin:0;
+	        padding: 0;
+	        padding-left: 90%;
+	        z-index: 999;
+	
+	        animation-iteration-count: infinite;
+	        animation-timing-function: linear;
+	        animation-name: tic-h;
+	        animation-duration: 30s;
+	
+        }
+        .news-ticker-h:hover { 
+	        animation-play-state: paused; 
+        }
 
-div.city{
-  font-size: 21px;
-  font-weight: bold;
-  text-transform: uppercase;
-  padding-top: 5px;
-  color: rgba(0,0,0,0.7);
-}
+        .news-ticker-h li{
+	        display: flex;
+	        width: 100%;
+	        align-items: center;
+	        white-space: nowrap;
+	        padding-left: 20px;
+        }
 
-div.temp{
-  font-size: 81px;
-  color: rgba(0,0,0,0.9);
-  font-weight: 100;
-}
+        .news-ticker-h li a{
+            color: #212529;
+	        font-weight: bold;
+        }
 
-div.panel
-{
-  display: inline-block;
-}
-
-div.right-panel{
-  position: absolute;
-  float: right;
-  top: 0;
-  margin-top: 35px;
-  padding-left: 10px;
+        @keyframes tic-h {
+	        0% {
+		    -webkit-transform: translate3d(0, 0, 0);
+		    transform: translate3d(0, 0, 0);
+		    visibility: visible;
+	    }
+	100% {
+		-webkit-transform: translate3d(-100%, 0, 0);
+		transform: translate3d(-100%, 0, 0);
+	}
 }
 
         /* Optional: Makes the sample page fill the window. */
@@ -78,6 +100,9 @@ div.right-panel{
 </head>
 
 <body>
+
+    <!-- Navigation bar -->
+
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
@@ -99,31 +124,29 @@ div.right-panel{
         </div>
     </nav>
     <h2>Dublin Bikes</h2>
+
+    <!-- moving weather data adapted from https://codehasbug.com/css/create-3-types-horizontal-vertical-news-ticker-html-css/ -->
+
+    <div class="ticker-wrapper-h">
+        <div class="heading">Current Weather</div>
+        
+        <ul class="news-ticker-h">
+            <li><a href=""><div><p>| Dublin City |</p></div></a></li>
+            <li><a href=""><div class="temperature-value"><p>- °<span>C</span></p></div></a></li>
+            <li><a href=""><div class="weather-container"><div class="weather-icon"></div></a></li>
+            <li><a href=""><div class="wind-speed"><p> -</p></div></a></li>
+            <li><a href=""><div class="weather-description"><p> - </p></div></a></li>
+            <li><a href=""><div><p>| Have a great day! |</p></div></a></li>
+
+        </ul>
+    </div>
+
+
     <select id="textbox"></select>
     <div id="map"></div>
 
 
-    <div class="container">
-        <div class="app-title">
-            <p>Weather</p>
-        </div>
-        <div class="notification"> </div>
-        <div class="weather-container">
-            <div class="weather-icon">
-            </div>
-            <div class="temperature-value">
-                <p>- °<span>C</span></p>
-            </div>
-            <div class="weather-description">
-                <p> - </p>
-            </div>
-            <div class="wind-speed">
-                <p> -</p>
-            </div>
-        </div>
-    </div>
-
-
+    
     
 <!-- Connecting to the flask app -->
     <script src="{{ url_for('static',filename='index1.js')}}"></script>

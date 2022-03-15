@@ -175,7 +175,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
 function displayWeather(){
   iconElement.innerHTML = `<img src="http://openweathermap.org/img/w/${weather.iconId}.png"/>`;
   tempElement.innerHTML = `${weather.temperature}°<span>C</span>`;
-  descElement.innerHTML = weather.description;
+  descElement.innerHTML = `<span>Current Description: </span>${weather.description }<span></span>`;
   windElement.innerHTML = `<span>Wind: </span>${weather.windspeed }<span>Km/h</span>`;
 }
 
