@@ -1,8 +1,12 @@
-// SELECT ELEMENTS
+// elements 
 const iconElement = document.querySelector(".weather-icon");
 const tempElement = document.querySelector(".temperature-value p");
 const descElement = document.querySelector(".weather-description p");
 const windElement = document.querySelector(".wind-speed p");
+const sunriseElement = document.querySelector(".sun-rise p");
+const sunsetElement = document.querySelector(".sun-set p");
+
+
 
 
 // variable to hold weather
@@ -139,8 +143,11 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
           weather.description = data[0].description1;
           weather.iconId = data[0].icon;
           weather.windspeed = data[0].windspeed;
-          console.log("hello", weather.temperature)
-          console.log("helllllo", weather.description)
+          weather.sunrise = new Date(data[0].sunrise); 
+          weather.sunset = new Date(data[0].sunset);
+
+
+          console.log("sun rise: ", weather.sunrise)
 
 
 
@@ -158,6 +165,9 @@ function displayWeather(){
   tempElement.innerHTML = `${weather.temperature}°<span>C</span>`;
   descElement.innerHTML = `<span>Current Description: </span>${weather.description }<span></span>`;
   windElement.innerHTML = `<span>Wind: </span>${weather.windspeed }<span>Km/h</span>`;
+  sunriseElement.innerHTML = `<span>Sun Rise Today: </span>${weather.sunrise}<span></span>`;
+  sunsetElement.innerHTML = `<span>Sun Set Today: </span>${weather.sunset}<span></span>`;
+
 }
 
 
