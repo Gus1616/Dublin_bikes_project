@@ -4,6 +4,7 @@ from sqlalchemy import create_engine
 from flask import jsonify
 import pandas as pd
 import json
+import pickle
 
 app = Flask(__name__)
 
