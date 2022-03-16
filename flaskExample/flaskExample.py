@@ -41,7 +41,7 @@ def get_stations():
     engine = create_engine("mysql+mysqldb://{}:{}@{}:{}/{}".format(USER, PASSWORD, URL, PORT, DB), echo=True)
     # query to join stations and availbility table. 
     sql_query_stations= """
-        SELECT station.address,station.bike_stands, station.name, station.position_lat,station.position_lng,station.status, avail.available_bike_stands, avail.available_bikes, avail.last_update
+        SELECT DISTINCT station.address,station.bike_stands, station.name, station.position_lat,station.position_lng,station.status, avail.available_bike_stands, avail.available_bikes, avail.last_update
         FROM station, availability avail
         INNER JOIN
             (
