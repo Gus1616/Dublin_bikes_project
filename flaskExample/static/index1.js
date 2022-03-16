@@ -145,6 +145,7 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
           weather.windspeed = data[0].windspeed;
           weather.sunrise = new Date(data[0].sunrise); 
           weather.sunset = new Date(data[0].sunset);
+         
 
 
           console.log("sun rise: ", weather.sunrise)
@@ -157,6 +158,13 @@ function handleLocationError(browserHasGeolocation, infoWindow, pos) {
     displayWeather();
   
 });
+
+
+function stripSunrise(sunrise){
+  return sunrise.slice(0,25);
+
+}
+
 
 
 // function to pass through the JSON as readable HTML objects. 
