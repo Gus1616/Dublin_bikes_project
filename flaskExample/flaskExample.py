@@ -69,8 +69,7 @@ def get_availability():
 def get_weather():
     engine = create_engine("mysql+mysqldb://{}:{}@{}:{}/{}".format(USER, PASSWORD, URL, PORT, DB), echo=True)
     sql_query_weather= """
-    SELECT * FROM weather ORDER BY temperature DESC LIMIT 1;
-    """
+        SELECT * FROM dbikes.weather order by sunrise desc limit 1;    """
     df = pd.read_sql_query(sql_query_weather, engine)
     # df = pd.read_sql_query("weather", engine)
 
