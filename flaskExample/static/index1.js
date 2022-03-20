@@ -182,6 +182,19 @@ function displayWeather(){
 
 
 
+// ATTEMPT AT LOADING SCREEN 
+// $(function(){
+//   setTimeout(function() {
+//      $('#loading').fadeOut(500);
+//   }, 2000);
+// });
+
+
+
+
+
+
+
 
   
 
