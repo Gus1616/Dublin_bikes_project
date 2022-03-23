@@ -182,12 +182,15 @@ function displayWeather(){
 
 
 
-// ATTEMPT AT LOADING SCREEN 
-// $(function(){
-//   setTimeout(function() {
-//      $('#loading').fadeOut(500);
-//   }, 2000);
-// });
+
+// Loading screen -  reference https://www.youtube.com/watch?v=MOlaldp1Fv4
+const spalsh = document.querySelector('.splash');
+document.addEventListener('DOMContentLoaded', (e)=>{
+  setTimeout(()=>{
+    spalsh.classList.add('display-none');
+}, 3000);
+
+})
 
 
 
