@@ -81,7 +81,7 @@ def main():
             r.json()
             weather_to_db(r.text)
             print("aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa")
-            time.sleep(5*1)
+            time.sleep(5*10)
 
             return
         except:

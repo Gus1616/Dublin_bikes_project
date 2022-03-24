@@ -132,4 +132,3 @@ if __name__ == '__main__':
             
 
 
-metadata = sqla.MetaData()
