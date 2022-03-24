@@ -216,7 +216,7 @@ locationButton1.addEventListener("click", () => {
                 },
                 
             })
-        var displayInfo = "<h3>" + station.address + "</br>" + station.position_lat + "," + station.position_lng +"</br>"+"</h3>Bikes Available : " + station.available_bikes + "</br>Bike Stands Free : " + station.available_bike_stands;
+        var displayInfo = "<h3>" + station.address + "</br>" + "</h3>Bikes Available : " + station.available_bikes + "</br>Bike Stands Free : " + station.available_bike_stands;
 
 
         // Generate infoWindow
