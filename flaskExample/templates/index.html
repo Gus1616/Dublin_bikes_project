@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Dublin Bikes</title>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=default"></script>
+    <!--    <link rel="stylesheet" type="text/css" href="./style.css" />-->
+    <style>
+        /* Always set the map height explicitly to define the size of the div
+       * element that contains the map. */
+        #map {
+            margin-top: 200px;
+            height: 50%;
+        }
+
+
+        .splash{
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: #121417;
+            z-index: 200;
+            color: white;
+            text-align: center;
+            line-height: 90vh;
+
+
+        }
+        .tableinfo table, td{
+        border: 3px solid #2A9DF4;
+        border-collapse: collapse;
+        width: 165px;
+        text-align: center;
+        }
+        
+  
+
+        @keyframes fadeIn {
+            to{
+                opacity: 1;
+            }
+        }
+
+        .fade-in{
+            opacity: 0;
+            animation: fadeIn 1s ease-in forwards;
+            width: 500px;
+            height: 300px;
+        }
+
+        .splash.display-none{
+            position: fixed;
+            opacity: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100vh;
+            background: black;
+            z-index: -10;
+            color: white;
+            text-align: center;
+            line-height: 90vh;
+            
+
+        }
+
+
+
+
+/* CSS for moving weather data adapted from https://codehasbug.com/css/create-3-types-horizontal-vertical-news-ticker-html-css/ */
+        .ticker-wrapper-h{
+	        display: flex;	
+	        position: relative;
+	        overflow: hidden;
+	        border: 1px solid #1c6547;
+        }
+
+        .ticker-wrapper-h .heading{
+	        background-color: #1c6547;
+	        color: #fff;
+	        padding: 5px 10px;
+	        flex: 0 0 auto;
+	        z-index: 1000;
+        }
+        .ticker-wrapper-h .heading:after{
+	        content: "";
+	        position: absolute;
+	        top: 0;
+	        border-left: 20px solid #1c6547;
+	        border-top: 17px solid transparent;
+	        border-bottom: 15px solid transparent;
+        }
+
+
+        .news-ticker-h{
+	        display: flex;
+	        margin:0;
+	        padding: 0;
+	        padding-left: 90%;
+	        z-index: 999;
+	
+	        animation-iteration-count: infinite;
+	        animation-timing-function: linear;
+	        animation-name: tic-h;
+	        animation-duration: 30s;
+	
+        }
+        .news-ticker-h:hover { 
+	        animation-play-state: paused; 
+        }
+
+        .news-ticker-h li{
+	        display: flex;
+	        width: 100%;
+	        align-items: center;
+	        white-space: nowrap;
+	        padding-left: 20px;
+        }
+
+        .news-ticker-h li a{
+            color: #212529;
+	        font-weight: bold;
+        }
+
+        @keyframes tic-h {
+	        0% {
+		    -webkit-transform: translate3d(0, 0, 0);
+		    transform: translate3d(0, 0, 0);
+		    visibility: visible;
+	    }
+	    100% {
+		-webkit-transform: translate3d(-100%, 0, 0);
+		transform: translate3d(-100%, 0, 0);
+	    }
+        }   
+
+        
+
+        /* Optional: Makes the sample page fill the window. */
+        html,
+        body {
+            height: 100%;
+            width: auto;
+            margin: 0;
+            padding: 0;
+        }
+
+    </style>
+</head>
+
+<body>
+<!-- ATTEMPT AT LOADING SCREEN  -->
+    <!-- <div id="loading"></div> -->
+
+    <!-- Navigation bar -->
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="#">Dublin Bikes</a>
+            </div>
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav">
+                    <li class="active"><a href="{{ url_for('home') }}">Home</a></li>
+                    <li><a href="{{ url_for('about') }}">About</a></li>
+                    <li><a href="{{ url_for('info_weather') }}">Weather</a></li>
+                    <li><a href="{{ url_for('contact') }}">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <h2 style="font-weight: bold; color: blue;">Dublin Bikes</h2>
+
+    <!-- moving weather data adapted from https://codehasbug.com/css/create-3-types-horizontal-vertical-news-ticker-html-css/ -->
+
+    <div class="ticker-wrapper-h">
+        <div class="heading">Current Weather</div>
+        
+        <ul class="news-ticker-h">
+            <li><a href=""><div><p>| Dublin City |</p></div></a></li>
+            <li><a href=""><div class="temperature-value"><p>- °<span>C</span></p></div></a></li>
+            <li><a href=""><div class="weather-container"><div class="weather-icon"></div></a></li>
+            <li><a href=""><div class="wind-speed"><p> -</p></div></a></li>
+            <li><a href=""><div class="weather-description"><p> - </p></div></a></li>
+            <li><a href=""><div class="sun-rise"><p> - </p></div></a></li>
+            <li><a href=""><div class="sun-set"><p> - </p></div></a></li>
+            <li><a href=""><div><p>| Have a great day! |</p></div></a></li>
+
+        </ul>
+    </div>
+
+    <div class="splash">
+        <h1>The Dublin Bikes App</h1>
+        <img src="{{url_for('static', filename='bike-loading-gif.gif')}}" alt="Dublin Bikes" class="fade-in">
+
+    </div>
+<!-- aaaaaaaaaaaaaaaaaaaaaaa -->
+    <select id="textbox"></select>
+    <button type="button" onclick="myFunction();">Select Station</button>
+    <div id = abcd></div>
+    <audio id="audio" src="https://egyptiancastle.com/community/kids/learn/sounds/Bicycle.wav"></audio>
+    <div id="map"></div>
+
+<!-- </div>     -->
+
+
+<!-- <div id="preloader"></div> -->
+
+
+    
+    
+<!-- Connecting to the flask app -->
+    <script src="{{ url_for('static',filename='index1.js')}}"></script>
+
+
+    <!-- Async script executes immediately and must be after any DOM elements used in callback. -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAb8zXbwKXBxIng1urDIW4BvTS6Yon8i0I&callback=initMap&v=weekly" async></script>
+
+    <footer class="container-fluid text-center">
+
+        <p>End of website</p>
+    </footer>
+</body>
+
+</html>
