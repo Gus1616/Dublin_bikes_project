@@ -5,7 +5,8 @@ from flask import jsonify
 import pandas as pd
 import json
 import pickle
-
+import pymysql
+pymysql.install_as_MySQLdb()
 app = Flask(__name__)
 
 # connect to db

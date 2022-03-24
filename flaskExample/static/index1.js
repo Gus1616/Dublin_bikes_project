@@ -18,7 +18,8 @@ function initMap() {
         center: new google.maps.LatLng(53.350140, -6.266155),
         zoom: 14,
     });
-
+    test1 = [];
+    test2 = [];
    
 // pop up window variable
     infoWindow = new google.maps.InfoWindow();
@@ -55,6 +56,39 @@ function initMap() {
       handleLocationError(false, infoWindow, map.getCenter());
     }
   });
+// NEW code to get current location for second button
+const locationButton1 = document.createElement("button");
+locationButton1.textContent = "nearest location";
+locationButton1.classList.add("custom-map-control-button1");
+map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton1);
+locationButton1.addEventListener("click", () => {
+  // Try HTML5 geolocation.
+  if (navigator.geolocation) {
+    navigator.geolocation.getCurrentPosition(
+      (position) => {
+        const pos = {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        };
+        find_closest_marker(position.coords.latitude, position.coords.longitude)
+        console.log('In')
+        // infoWindow.setPosition(pos);
+        // infoWindow.setContent("Location found.");
+        // infoWindow.open(map);
+        // map.setCenter(pos);
+      },
+      () => {
+        handleLocationError(true, infoWindow, map.getCenter());
+      }
+    );
+  } else {
+    // Browser doesn't support Geolocation
+    handleLocationError(false, infoWindow, map.getCenter());
+    console.log('Ien')
+  }
+});
+
+
 //aaaaaaaaaaaaa
   text = "";
 // fetch function to get stations data 
@@ -64,8 +98,19 @@ function initMap() {
     }).then((json) => {
       // looping through each station then adding data to the map
         json.forEach(station => {
-            var color = 'Blue';
-            // aaaaaaaaaaaaaaaaaaaaa
+          var color = 'Blue';
+
+          if (station.available_bikes >= 0 && station.available_bikes <= 5 ){
+            color = 'Red';
+          }
+          if (station.available_bikes >= 6 && station.available_bikes <= 15){
+            color = 'Orange';
+          }
+          if (station.available_bikes > 15){
+            color = 'Green';
+          }
+          test1.push(station.position_lat);
+          test2.push(station.position_lng);
             fill1 = "<option value=";
             fill2 = ">";
             fill3 = "</option>";
@@ -217,6 +262,7 @@ markers.push(marker)
 }
 
 function makeClickable(map, circle, info) {
+  console.log('In the make clickable')
     var infowindow = new google.maps.InfoWindow({
         content: info
     });
@@ -283,11 +329,55 @@ function displayWeather(){
   sunsetElement.innerHTML = `<span>Sun Set Today: </span>${weather.sunset}<span></span>`;
 
 }
+function find_closest_marker(lat1, lon1) {    
+  var pi = Math.PI;
+  var R = 6371; //equatorial radius
+  var distances = [];
+  var closest = -1;
 
+  for( i=0;i<110; i++ ) {  
+      console.log(test1[i])
+      console.log(test2[i])
+      var lat2 = test1[i];
+      var lon2 = test2[i];
 
+      var chLat = lat2-lat1;
+      var chLon = lon2-lon1;
 
+      var dLat = chLat*(pi/180);
+      var dLon = chLon*(pi/180);
 
+      var rLat1 = lat1*(pi/180);
+      var rLat2 = lat2*(pi/180);
 
+      var a = Math.sin(dLat/2) * Math.sin(dLat/2) + 
+                  Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(rLat1) * Math.cos(rLat2); 
+      var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a)); 
+      var d = R * c;
+
+      distances[i] = d;
+      if ( closest == -1 || d < distances[closest] ) {
+          closest = i;
+      }
+  }
+
+  // (debug) The closest marker is:
+  console.log('Please work')
+  console.log(test1[closest]);
+  console.log(test2[closest]);
+  var center = new google.maps.LatLng(test1[closest], test2[closest]);
+  // using global variable:
+  window.map.panTo(center);  
+  circle = new google.maps.Marker({
+    map: map,
+    clickable: true,
+    position: {
+        lat: test1[closest],
+        lng: test2[closest]
+    }
+    
+})
+}
 
 // Loading screen -  reference https://www.youtube.com/watch?v=MOlaldp1Fv4
 const spalsh = document.querySelector('.splash');
