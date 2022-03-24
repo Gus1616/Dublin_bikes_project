@@ -11,7 +11,7 @@ const sunsetElement = document.querySelector(".sun-set p");
 
 // variable to hold weather
 const weather = {};
-
+var markers = [];
 // intialise the map function
 function initMap() {
     map = new google.maps.Map(document.getElementById("map"), {
@@ -55,8 +55,8 @@ function initMap() {
       handleLocationError(false, infoWindow, map.getCenter());
     }
   });
-
-
+//aaaaaaaaaaaaa
+  text = "";
 // fetch function to get stations data 
 
     fetch("/stations").then(response => {
@@ -65,16 +65,95 @@ function initMap() {
       // looping through each station then adding data to the map
         json.forEach(station => {
             var color = 'Blue';
+            // aaaaaaaaaaaaaaaaaaaaa
             fill1 = "<option value=";
             fill2 = ">";
-            let text = "<select>";
+            fill3 = "</option>";
 
+            table = "<table id = tableinfo>";
+            tableclose = "</table>";
+
+            tablerow = "<tr>";
+            tablerowclose = "</tr>";
+
+            tabledata = "<td>";
+            tabledataclose = "</td>";
+            
+            
+            if(station.banking == "0"){station.banking = "Unavailable";}
+            else if (station.banking == "1"){station.banking = "Available";}
+            
+            if(station.bonus == "0"){station.bonus = "Unavailable";}
+            else if (station.bonus == "1"){station.bonus = "Available";}
+            station.address = station.address.replaceAll("'","");
+            
+            var date = new Date(station.last_update);
+            // Hours part from the timestamp
+            var hours = date.getHours();
+            // Minutes part from the timestamp
+            var minutes = "0" + date.getMinutes();
+            // Seconds part from the timestamp
+            var seconds = "0" + date.getSeconds();
+
+            // Will display time in 10:30:23 format
+            var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
+            
+            content_of_table =("'" + table + 
+            tablerow + 
+            tabledata + "Station Address" + tabledataclose +  
+            tabledata + "Station Status"  + tabledataclose +  
+            tablerowclose + 
+
+            tablerow + 
+            tabledata + station.address + tabledataclose +  
+            tabledata + station.status  + tabledataclose +  
+            tablerowclose +
+
+            tablerow + 
+            tabledata + "Location" + tabledataclose +   
+            tablerowclose + 
+
+            tablerow + 
+            tabledata + station.position_lat +tabledataclose + 
+            tabledata + station.position_lng + tabledataclose + 
+            tablerowclose + 
+
+            tablerow + 
+            tabledata + "Available Bikes" + tabledataclose + 
+            tabledata + "Available Bike Stands" + tabledataclose +  
+            tablerowclose + 
+
+            tablerow + 
+            tabledata + station.available_bikes + tabledataclose + 
+            tabledata + station.available_bike_stands + tabledataclose +  
+            tablerowclose + 
+
+            tablerow + 
+            tabledata + "Banking" + tabledataclose + 
+            tabledata + "Bonus" + tabledataclose + 
+            tablerowclose +
+
+
+            tablerow + 
+            tabledata + station.banking + tabledataclose + 
+            tabledata + station.bonus + tabledataclose + 
+            tablerowclose +
+
+            tablerow + 
+            tabledata + "Last Updated"+ tabledataclose + 
+            tablerowclose +
+
+            tablerow + 
+            tabledata + formattedTime + tabledataclose + 
+            tablerowclose + tableclose + "'" );
+            
+              
+          
+  
             // console.log(station);
-            text += fill1 + fill2 + station.address;
-
-            text += "</select>";
+            text +=  fill1 + content_of_table + fill2 + station.address + fill3;
             document.getElementById("textbox").innerHTML = text;
-
+            
 
             // console.log('station', station);
             circle = new google.maps.Circle({
@@ -108,7 +187,34 @@ function initMap() {
 
 });
 }
+// aaaaaaaaaa
+function myFunction() {
+  var indexselect = document.getElementById("textbox").selectedIndex;
+  aaa = (document.getElementsByTagName("option")[indexselect].value);
+  document.getElementById("abcd").innerHTML = aaa;
+  var indexselected_ints = aaa.match(/\d+\.\d+|\d+\b|\d+(?=\w)/g);
+  var audio = document.getElementById("audio");
+  audio.play();
 
+  var selected_station_lat = parseFloat(indexselected_ints[0]);
+  var selected_station_lng = (parseFloat(indexselected_ints[1])*-1);
+  for (var i=0; i<markers.length; i++) {
+    markers[i].setMap(null);
+}
+markers = [];
+
+  marker = new google.maps.Marker({
+    map: map,
+    position: {
+      lat: (selected_station_lat),
+      lng: (selected_station_lng)
+    },
+  
+  });
+  marker_position = new google.maps.LatLng(selected_station_lat, selected_station_lng);
+  map.setCenter(marker_position);
+markers.push(marker)
+}
 
 function makeClickable(map, circle, info) {
     var infowindow = new google.maps.InfoWindow({
