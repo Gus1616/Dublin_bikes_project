@@ -368,6 +368,12 @@ function find_closest_marker(lat1, lon1) {
   var center = new google.maps.LatLng(test1[closest], test2[closest]);
   // using global variable:
   window.map.panTo(center);  
+  for (var i=0; i<markers.length; i++) {
+    markers[i].setMap(null);
+}
+  
+  markers = [];
+  
   circle = new google.maps.Marker({
     map: map,
     clickable: true,
@@ -377,6 +383,9 @@ function find_closest_marker(lat1, lon1) {
     }
     
 })
+marker_position = new google.maps.LatLng(test1[closest], test2[closest]);
+map.setCenter(marker_position);
+markers.push(circle)
 }
 
 // Loading screen -  reference https://www.youtube.com/watch?v=MOlaldp1Fv4
