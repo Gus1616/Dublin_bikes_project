@@ -89,7 +89,8 @@ locationButton1.addEventListener("click", () => {
 });
 
 
-//aaaaaaaaaaaaa
+//contents of the loaded in table will be stored in this string called
+// text. It is initalised as blank to begin with.
   text = "";
 // fetch function to get stations data 
 
@@ -111,6 +112,9 @@ locationButton1.addEventListener("click", () => {
           }
           test1.push(station.position_lat);
           test2.push(station.position_lng);
+          // fill 1,2 and 3 along with the various other table related variables 
+          // below are used in creating a string for the table once the select station 
+          // button is pressed.
             fill1 = "<option value=";
             fill2 = ">";
             fill3 = "</option>";
@@ -124,14 +128,17 @@ locationButton1.addEventListener("click", () => {
             tabledata = "<td>";
             tabledataclose = "</td>";
             
-            
+            // banking and bonus are represented as 0 for no and 1 for yes .
+            // these are changed into a more realable format.
+
             if(station.banking == "0"){station.banking = "Unavailable";}
             else if (station.banking == "1"){station.banking = "Available";}
             
             if(station.bonus == "0"){station.bonus = "Unavailable";}
             else if (station.bonus == "1"){station.bonus = "Available";}
             station.address = station.address.replaceAll("'","");
-            
+            // the below code is used to turn the time of last update from 
+            // a timestamp into a more readable format.
             var date = new Date(station.last_update);
             // Hours part from the timestamp
             var hours = date.getHours();
@@ -143,6 +150,12 @@ locationButton1.addEventListener("click", () => {
             // Will display time in 10:30:23 format
             var formattedTime = hours + ':' + minutes.substr(-2) + ':' + seconds.substr(-2);
             
+
+            //  a string is created to put the required information alongside 
+            // the table variables so that it can be converted into a string which 
+            // is read as html code to display the table .
+
+
             content_of_table =("'" + table + 
             tablerow + 
             tabledata + "Station Address" + tabledataclose +  
@@ -195,7 +208,9 @@ locationButton1.addEventListener("click", () => {
               
           
   
-            // console.log(station);
+             // the blank string text is filled with the required information
+            // along with fill variables which represent the option html tag.
+            // the textbox div is then populated with this string.
             text +=  fill1 + content_of_table + fill2 + station.address + fill3;
             document.getElementById("textbox").innerHTML = text;
             
@@ -232,17 +247,36 @@ locationButton1.addEventListener("click", () => {
 
 });
 }
-// aaaaaaaaaa
-function myFunction() {
+// This function is used to display the table of information when a station 
+// is selected. It is activated on the click of the select station button.
+function table_populate() {
+
+  // this code allows for the table to be updated with the correct information
+// based on which station is selected and is displayed in the table station div.
+
   var indexselect = document.getElementById("textbox").selectedIndex;
-  aaa = (document.getElementsByTagName("option")[indexselect].value);
-  document.getElementById("abcd").innerHTML = aaa;
-  var indexselected_ints = aaa.match(/\d+\.\d+|\d+\b|\d+(?=\w)/g);
+  index = (document.getElementsByTagName("option")[indexselect].value);
+  document.getElementById("Table_station").innerHTML = index;
+
+  // all floats from the data provided are found by filtering out anything that
+  // is not a number.
+
+  var indexselected_ints = index.match(/\d+\.\d+|\d+\b|\d+(?=\w)/g);
+  
+  // the audio mp3 file is played also on the click of the station button.
   var audio = document.getElementById("audio");
   audio.play();
 
+// all floats from the table information and listed in indexselected_ints 
+// the firts of these is the stations latitude and the second is its longitude.
+// these are used to create a marker on the map.
   var selected_station_lat = parseFloat(indexselected_ints[0]);
   var selected_station_lng = (parseFloat(indexselected_ints[1])*-1);
+  
+  // each time a new station is clicked or if the nearest staion is 
+  // selected all prior markers are removed before the new marker is placed. THese 
+  // are pushed to the markers array.
+
   for (var i=0; i<markers.length; i++) {
     markers[i].setMap(null);
 }
@@ -260,6 +294,8 @@ markers = [];
   map.setCenter(marker_position);
 markers.push(marker)
 }
+
+
 
 function makeClickable(map, circle, info) {
   console.log('In the make clickable')
