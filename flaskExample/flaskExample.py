@@ -1,13 +1,20 @@
-from distutils.log import debug
-from flask import Flask, render_template, g
+
+# from distutils.log import debug
+from flask import Flask, render_template, g, request, jsonify
 from sqlalchemy import create_engine
-from flask import jsonify
 import pandas as pd
-import json
+# import json
 import pickle
+import numpy as np
+
 # import pymysql
 # pymysql.install_as_MySQLdb()
 app = Flask(__name__)
+model = pickle.load(open('flaskExample\model.pkl', 'rb'))
+
+
+
+
 
 # connect to db
 URL = "dublin-bikesdb.cmd8vuwgew1e.us-east-1.rds.amazonaws.com"
@@ -76,6 +83,19 @@ def get_weather():
 
     results = df.to_json(orient='records')
     return results
+
+# Predictions
+@app.route('/predict', methods=['POST'])
+def predict():
+    int_features = [int(x) for x in request.form.values()]
+    final_features = [np.array(int_features)]
+    prediction = model.predict(final_features)
+
+    output = round(prediction[0])
+
+    return render_template('index.html', prediction_text='Number of available bikes {}'.format(output))
+
+    
 
 if __name__== "__main__":
     app.run(debug=True)
