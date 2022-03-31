@@ -213,6 +213,11 @@ input {
 }
 input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
 
+.predictionResult {
+    border-style: ridge;
+
+}
+
         
 
         /* Optional: Makes the sample page fill the window. */
@@ -332,11 +337,10 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
     <select id="day2"></select>
     <button type="button" >Make Prediction</button>
 
-<!-- </div>     -->
 
 
-<!-- <div id="preloader"></div> -->
 
+<!-- Jour planner code adapted from https://www.youtube.com/watch?v=UbCWoMf80PY -->
 <div class="login">
 	<h1>Journey Planner</h1>
 
@@ -351,7 +355,8 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 
    <br>
    <br>
-   {{ prediction_text }}  
+   <div class="predictionResult"> {{ prediction_text }} </div>
+</div> 
     
 <!-- Connecting to the flask app -->
     <script src="{{ url_for('static',filename='index1.js')}}"></script>
