@@ -114,6 +114,10 @@
             margin-top: 150px;
             font-family: Andale Mono, monospace	;
         }
+        h2{
+            font-family: Andale Mono, monospace	;
+            text-align: center;
+        }
 
 
         .dark-mode {
@@ -135,7 +139,7 @@
         }
 
         .ticker-wrapper-h .heading{
-	        background-color: darkblue;
+	        background-color:#234a55;;
 	        color: #fff;
 	        padding: 5px 10px;
 	        flex: 0 0 auto;
@@ -145,11 +149,13 @@
 	        content: "";
 	        position: absolute;
 	        top: 0;
-	        border-left: 20px solid darkblue;
+	        border-left: 20px solid #234a55;;
 	        border-top: 17px solid transparent;
 	        border-bottom: 15px solid transparent;
         }
-
+        .heading{
+            padding-top: 30px;
+        }
 
         .news-ticker-h{
 	        display: flex;
@@ -202,8 +208,11 @@
 	height:400px;
 }
 
-.login h1 { color: blue; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
-
+.login h1 { color:#234a55;; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
+#heading1 {
+    font-size: 50px;
+    padding: 25px;
+}
 input { 
 	width: 100%; 
 	margin-bottom: 10px; 
@@ -294,7 +303,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="#">Dublin Bikes</a>
+                <a class="navbar-brand" href="{{ url_for('home') }}">Dublin Bikes</a>
             </div>
             <div class="collapse navbar-collapse" id="myNavbar">
                 <ul class="nav navbar-nav">
@@ -306,7 +315,9 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
             </div>
         </div>
     </nav>
-    <h2 style="font-weight: bold; color: blue;">Dublin Bikes</h2>
+    
+    <h2 id='heading1'style="font-weight: bold; color: #234a55;">Dublin Bikes</h2>
+    
 
     <!-- moving weather data adapted from https://codehasbug.com/css/create-3-types-horizontal-vertical-news-ticker-html-css/ -->
 
