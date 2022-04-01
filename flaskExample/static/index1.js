@@ -215,6 +215,11 @@ locationButton1.addEventListener("click", () => {
             // the textbox div is then populated with this string.
             text +=  fill1 + content_of_table + fill2 + station.address + fill3;
             document.getElementById("textbox").innerHTML = text;
+
+
+            index_start = (document.getElementsByTagName("option")[0].value);
+            document.getElementById("Table_station").innerHTML = index_start;
+
             
             text_predict += fill1 + fill2 + station.address + fill3;
             document.getElementById("pretext").innerHTML = text_predict;
@@ -471,6 +476,49 @@ document.addEventListener('DOMContentLoaded', (e)=>{
 
 
 
+// $(document).on('submit','#todo-form',function(e)
+//                    {
+//       console.log('hello');
+//       e.preventDefault();
+//       $.ajax({
+//         type:'POST',
+//         url:'/predict',
+//         data:{
+//           experience:$("#todo").val(),
+//           test_score:$("#todo").val(),
+//           interview_score:$("#todo").val(),
+
+
+
+//         },
+//         success:function()
+//         {
+//           alert('saved');
+//         }
+//       })
+//     });
+
+// function submitDetailsForm() {
+//     $.ajax({
+//           type:'POST',
+//           url:'/predict',
+//           data:{
+//             experience:$("#todo").val(),
+//             test_score:$("#todo").val(),
+//             interview_score:$("#todo").val(),
+
+
+//           }
+//           })
+//       }
+
+
+
+
+function darkMode() {
+  var element = document.body;
+  element.classList.toggle("dark-mode");
+}
 
 
 
