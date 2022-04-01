@@ -58,7 +58,7 @@ function initMap() {
   });
 // NEW code to get current location for second button
 const locationButton1 = document.createElement("button");
-locationButton1.textContent = "nearest location";
+locationButton1.textContent = "Nearest location";
 locationButton1.classList.add("custom-map-control-button1");
 map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton1);
 locationButton1.addEventListener("click", () => {
