@@ -88,7 +88,7 @@ locationButton1.addEventListener("click", () => {
   }
 });
 
-
+// console.log(station.banking)
 //contents of the loaded in table will be stored in this string called
 // text. It is initalised as blank to begin with.
   text = "";
@@ -101,6 +101,8 @@ locationButton1.addEventListener("click", () => {
     }).then((json) => {
       // looping through each station then adding data to the map
         json.forEach(station => {
+          
+          
           var color = 'Blue';
 
           if (station.available_bikes >= 0 && station.available_bikes <= 5 ){
@@ -170,15 +172,6 @@ locationButton1.addEventListener("click", () => {
             tablerowclose +
 
             tablerow + 
-            tabledata + "Location" + tabledataclose +   
-            tablerowclose + 
-
-            tablerow + 
-            tabledata + station.position_lat +tabledataclose + 
-            tabledata + station.position_lng + tabledataclose + 
-            tablerowclose + 
-
-            tablerow + 
             tabledata + "Available Bikes" + tabledataclose + 
             tabledata + "Available Bike Stands" + tabledataclose +  
             tablerowclose + 
@@ -215,6 +208,11 @@ locationButton1.addEventListener("click", () => {
             // the textbox div is then populated with this string.
             text +=  fill1 + content_of_table + fill2 + station.address + fill3;
             document.getElementById("textbox").innerHTML = text;
+
+
+            
+            index_start = (document.getElementsByTagName("option")[0].value);
+            document.getElementById("Table_station").innerHTML = index_start;
             
             text_predict += fill1 + fill2 + station.address + fill3;
             document.getElementById("pretext").innerHTML = text_predict;
