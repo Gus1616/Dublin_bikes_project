@@ -10,7 +10,7 @@ import numpy as np
 # import pymysql
 # pymysql.install_as_MySQLdb()
 app = Flask(__name__)
-model = pickle.load(open('flaskExample\model.pkl', 'rb'))
+model = pickle.load(open('model.pkl', 'rb'))
 
 
 
@@ -87,13 +87,15 @@ def get_weather():
 # Predictions
 @app.route('/predict', methods=['POST'])
 def predict():
-    int_features = [int(x) for x in request.form.values()]
-    final_features = [np.array(int_features)]
-    prediction = model.predict(final_features)
+    # if request.method == 'POST':
 
-    output = round(prediction[0])
+        int_features = [int(x) for x in request.form.values()]
+        final_features = [np.array(int_features)]
+        prediction = model.predict(final_features)
 
-    return render_template('index.html', prediction_text='Number of available bikes {}'.format(output))
+        output = round(prediction[0])
+
+        return render_template('index.html', prediction_text='Number of predicited available bikes {}'.format(output))
 
     
 
