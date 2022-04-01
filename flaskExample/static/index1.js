@@ -88,7 +88,7 @@ locationButton1.addEventListener("click", () => {
   }
 });
 
-
+// console.log(station.banking)
 //contents of the loaded in table will be stored in this string called
 // text. It is initalised as blank to begin with.
   text = "";
@@ -101,6 +101,8 @@ locationButton1.addEventListener("click", () => {
     }).then((json) => {
       // looping through each station then adding data to the map
         json.forEach(station => {
+          
+          
           var color = 'Blue';
 
           if (station.available_bikes >= 0 && station.available_bikes <= 5 ){
@@ -168,15 +170,6 @@ locationButton1.addEventListener("click", () => {
             tabledata + station.address + tabledataclose +  
             tabledata + station.status  + tabledataclose +  
             tablerowclose +
-
-            tablerow + 
-            tabledata + "Location" + tabledataclose +   
-            tablerowclose + 
-
-            tablerow + 
-            tabledata + station.position_lat +tabledataclose + 
-            tabledata + station.position_lng + tabledataclose + 
-            tablerowclose + 
 
             tablerow + 
             tabledata + "Available Bikes" + tabledataclose + 
