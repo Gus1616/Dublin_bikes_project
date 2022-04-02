@@ -196,7 +196,7 @@
         .login { 
 	/* position: absolute; */
 	/* top: 40%; */
-	/* left: 50%; */
+	/* left: 100px; */
 	/* margin: -150px 0 0 -150px; */
 	width:400px;
 	height:400px;
@@ -359,8 +359,8 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
      <!-- Main Input For Receiving Query to our ML -->
     <form action="{{ url_for('predict')}}"method="post" id="todo-form">
     	<!-- <input type="text" name="experience" placeholder="day" required="required" /> -->
-        <label for="w_class">Select Day</label>
-        <select id="w_class" name="experience" id="todo">
+        <label for="daySelect">Select Day</label>
+        <select id="daySelect" name="experience" id="todo">
             <option value="0">Monday</option>
             <option value="1">Tuesday</option>
             <option value="2">Wednesday</option>
@@ -370,8 +370,8 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
             <option value="6">Sunday</option>
         </select>
         <br>
-        <label for="edu">Select Hour</label>
-        <select id="edu" name="test_score" id="todo">
+        <label for="hourSelect">Select Hour</label>
+        <select id="hourSelect" name="test_score" id="todo">
             <option value="0">12am</option>
             <option value="5">5am</option>
             <option value="6">6am</option>
@@ -394,20 +394,22 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
             <option value="23">11pm</option>
         </select>
         <br>
+        <label for="begin">Select Station</label>
+        <select name="interview_score" required="required" id="begin">
+            <option>Select a Station</option>
+        </select>
 
         <!-- <input type="text" name="test_score" placeholder="hour" required="required" /> -->
-		<input id="todo" type="text" name="interview_score" placeholder="stations" required="required" />
-        <!-- <button hx-get="/predict" hx-target="#predictionText" hx-swap="outerHTML">
-            Predict
-          </button> -->
-    
-        <button type="submit" onClick='submitDetailsForm()' class="btn btn-primary btn-block btn-large">Predict</button>
+		<!-- <input id="todo" type="text" name="interview_score" placeholder="stations" required="required" /> -->
+        
+
+        <button type="submit" onClick='submitDetailsForm()' id= "todo-form" class="btn btn-primary btn-block btn-large">Predict</button>
     </form>
 
    <br>
    <br>
    <div class="predictionResult"> {{ prediction_text }} </div>
-   <p id="predictionText"></p>
+   <!-- <div id="results"> {{ prediction_text }} </div> -->
 
 </div> 
 
