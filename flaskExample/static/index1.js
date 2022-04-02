@@ -220,6 +220,13 @@ locationButton1.addEventListener("click", () => {
             text_predict2 += fill1 + fill2 + station.address + fill3;
             document.getElementById("pretext2").innerHTML = text_predict2;
 
+
+            // drop that is used for predictions:
+            let stationDropdown = "<option value=\"" + station.number + "\">" + station.address + "</option>";
+            document.getElementById("begin").innerHTML += stationDropdown;
+
+            
+
             // console.log('station', station);
             circle = new google.maps.Circle({
                 strokeColor: color,
@@ -281,6 +288,8 @@ day_of_week2 = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","S
 for(i = 0; i<day_of_week2.length;i++){
             day_predict_select2 +=  "<option>" + day_of_week2[i] + "</option>";
             document.getElementById("day2").innerHTML = day_predict_select2;}
+
+
 // This function is used to display the table of information when a station 
 // is selected. It is activated on the click of the select station button.
 function table_populate() {
@@ -470,26 +479,35 @@ document.addEventListener('DOMContentLoaded', (e)=>{
 
 
 // $(document).on('submit','#todo-form',function(e)
-//                    {
+// $('#todo-form').submit(function (event) {
+
+                   
 //       console.log('hello');
-//       e.preventDefault();
+//       event.preventDefault();
+//       var dataToDisplay = $("#todo-form").val();
+//       var dayCheck = $("#todo").val(),
+//       console.log(dayCheck);
+
+//       console.log(dataToDisplay);
+
 //       $.ajax({
 //         type:'POST',
 //         url:'/predict',
 //         data:{
-//           experience:$("#todo").val(),
-//           test_score:$("#todo").val(),
-//           interview_score:$("#todo").val(),
+//           dataToDisplay
+          // experience:$("#todo").val(),
+          // test_score:$("#todo").val(),
+          // interview_score:$("#todo").val(),
 
 
 
-//         },
-//         success:function()
-//         {
-//           alert('saved');
-//         }
-//       })
-//     });
+    //     },
+    //     success:function()
+    //     {
+    //       $("#results").append(html);
+    //     }
+    //   })
+    // });
 
 // function submitDetailsForm() {
 //     $.ajax({
