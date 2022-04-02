@@ -92,8 +92,7 @@ locationButton1.addEventListener("click", () => {
 //contents of the loaded in table will be stored in this string called
 // text. It is initalised as blank to begin with.
   text = "";
-  text_predict= "";
-  text_predict2= "";
+
 // fetch function to get stations data 
 
     fetch("/stations").then(response => {
@@ -172,6 +171,15 @@ locationButton1.addEventListener("click", () => {
             tablerowclose +
 
             tablerow + 
+            tabledata + "Location" + tabledataclose +   
+            tablerowclose + 
+
+            tablerow + 
+            tabledata + station.position_lat +tabledataclose + 
+            tabledata + station.position_lng + tabledataclose + 
+            tablerowclose + 
+
+            tablerow + 
             tabledata + "Available Bikes" + tabledataclose + 
             tabledata + "Available Bike Stands" + tabledataclose +  
             tablerowclose + 
@@ -214,11 +222,7 @@ locationButton1.addEventListener("click", () => {
             document.getElementById("Table_station").innerHTML = index_start;
 
             
-            text_predict += fill1 + fill2 + station.address + fill3;
-            document.getElementById("pretext").innerHTML = text_predict;
-
-            text_predict2 += fill1 + fill2 + station.address + fill3;
-            document.getElementById("pretext2").innerHTML = text_predict2;
+          
 
             // console.log('station', station);
             circle = new google.maps.Circle({
@@ -254,33 +258,7 @@ locationButton1.addEventListener("click", () => {
 }
 
 
-time_predict_select = "";
-time_of_day= ["5.00","5.30","6.00","6.30","7.00","7.30","8.00","9.00","9.30","10.00","10.30","11.00",
-            "11.30","12.00","12.30","13.00","13.30","14.00","14.30","15.00","15.30","16.00","17.00","18.00","19.00",
-            "19.30","20.00","20.30","21.00","21.30","22.00","22.30","23.00","23.30"]
-for(i = 0; i<time_of_day.length;i++){
-            time_predict_select +=  "<option>" + time_of_day[i] + "</option>";
-            document.getElementById("time").innerHTML = time_predict_select;}
 
-day_predict_select = "";
-day_of_week = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
-for(i = 0; i<day_of_week.length;i++){
-            day_predict_select +=  "<option>" + day_of_week[i] + "</option>";
-            document.getElementById("day").innerHTML = day_predict_select;}
-
-time_predict_select2 = "";
-time_of_day2= ["5.00","5.30","6.00","6.30","7.00","7.30","8.00","9.00","9.30","10.00","10.30","11.00",
-            "11.30","12.00","12.30","13.00","13.30","14.00","14.30","15.00","15.30","16.00","17.00","18.00","19.00",
-            "19.30","20.00","20.30","21.00","21.30","22.00","22.30","23.00","23.30"]
-for(i = 0; i<time_of_day2.length;i++){
-            time_predict_select2 +=  "<option>" + time_of_day2[i] + "</option>";
-            document.getElementById("time2").innerHTML = time_predict_select2;}
-
-day_predict_select2 = "";
-day_of_week2 = ["Monday","Tuesday","Wednesday","Thursday","Friday","Saturday","Sunday"]
-for(i = 0; i<day_of_week2.length;i++){
-            day_predict_select2 +=  "<option>" + day_of_week2[i] + "</option>";
-            document.getElementById("day2").innerHTML = day_predict_select2;}
 // This function is used to display the table of information when a station 
 // is selected. It is activated on the click of the select station button.
 function table_populate() {
