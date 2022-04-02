@@ -1,6 +1,7 @@
 
 # from distutils.log import debug
-from flask import Flask, render_template, g, request, jsonify
+from flask import Flask, render_template, g, request, jsonify, url_for, redirect
+from sklearn.metrics import jaccard_score
 from sqlalchemy import create_engine
 import pandas as pd
 # import json
@@ -25,7 +26,7 @@ PASSWORD = "Dbikes123"
 
 engine = create_engine("mysql+mysqldb://{}:{}@{}:{}/{}".format(USER, PASSWORD, URL, PORT, DB), echo=True)
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def home():
     return render_template('index.html')
 
@@ -85,10 +86,10 @@ def get_weather():
     return results
 
 # Predictions
-@app.route('/predict', methods=['POST'])
+@app.route('/predict', methods=['GET','POST'])
 def predict():
-    # if request.method == 'POST':
 
+    
         int_features = [int(x) for x in request.form.values()]
         final_features = [np.array(int_features)]
         prediction = model.predict(final_features)

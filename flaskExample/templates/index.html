@@ -353,13 +353,13 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 
 
 
-<!-- Jour planner code adapted from https://www.youtube.com/watch?v=UbCWoMf80PY -->
+
+<!-- Journey planner code adapted from https://www.youtube.com/watch?v=UbCWoMf80PY -->
 <div class="login">
 	<h1>Plan the start of your journey</h1>
 
      <!-- Main Input For Receiving Query to our ML -->
     <form action="{{ url_for('predict')}}"method="post" id="todo-form">
-    	<!-- <input type="text" name="experience" placeholder="day" required="required" /> -->
         <label for="daySelect">Select Day</label>
         <select id="daySelect" name="experience" id="todo">
             <option value="0">Monday</option>
@@ -392,25 +392,19 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
             <option value="20">8pm</option>
             <option value="21">9pm</option>
             <option value="22">10pm</option>
-            <option value="23">11pm</option>
+            <option value="23">11pm</option> 
         </select>
         <br>
         <label for="begin">Select Station</label>
         <select name="interview_score" required="required" id="begin">
             <option>Select a Station</option>
         </select>
-
-        <!-- <input type="text" name="test_score" placeholder="hour" required="required" /> -->
-		<!-- <input id="todo" type="text" name="interview_score" placeholder="stations" required="required" /> -->
-        
-
         <button type="submit" onClick='submitDetailsForm()' id= "todo-form" class="btn btn-primary btn-block btn-large">Predict</button>
     </form>
 
    <br>
    <br>
-   <div class="predictionResult"> {{ prediction_text }} </div>
-   <!-- <div id="results"> {{ prediction_text }} </div> -->
+   <div class="predictionResult"> {{ prediction_text }} </div> 
 
 </div> 
 
@@ -439,6 +433,9 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
             <p class="copyright">Dublin Bikes © 2022</p>
         </footer>
     </div>
+        
+        
+
 </body>
 
 </html>

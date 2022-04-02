@@ -499,6 +499,31 @@ document.addEventListener('DOMContentLoaded', (e)=>{
 //           })
 //       }
 
+// document.getElementById('post-form').addEventListener('submit', sendForm);
+        
+        
+//         function sendForm(e){
+        
+//             e.preventDefault();
+        
+//             var name = document.getElementById('daySelect').value;
+//             var params = {daySelect:name}
+        
+        
+//             var xhr = new XMLHttpRequest();
+        
+//             xhr.open('post', '/predict', true);
+//             xhr.setRequestHeader('Content-type', 'application/json'); 
+//             xhr.onload = function(){
+//                 console.log('Finally');
+//                 document.getElementById('changeit'),innerHTML= this.responseText;
+//             }
+//             xhr.send(JSON.stringify(params));
+        
+//         }
+        
+        
+        
 
 
 
