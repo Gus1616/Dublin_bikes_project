@@ -95,8 +95,8 @@ def predict():
         prediction = model.predict(final_features)
 
         output = round(prediction[0])
-
-        return render_template('index.html', prediction_text='Number of predicited available bikes {}'.format(output))
+       
+        return jsonify({'number':output})
 
     
 

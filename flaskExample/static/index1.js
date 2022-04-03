@@ -454,76 +454,35 @@ document.addEventListener('DOMContentLoaded', (e)=>{
 
 
 
-// $(document).on('submit','#todo-form',function(e)
-// $('#todo-form').submit(function (event) {
+$(document).ready(function() {
 
-                   
-//       console.log('hello');
-//       event.preventDefault();
-//       var dataToDisplay = $("#todo-form").val();
-//       var dayCheck = $("#todo").val(),
-//       console.log(dayCheck);
+	$('form').on('submit', function(event) {
 
-//       console.log(dataToDisplay);
+		$.ajax({
+			data : {
+				number : $('#daySelect').val(),
+        number2 : $('#hourSelect').val(),
+        number3 : $('#begin').val(),
 
-//       $.ajax({
-//         type:'POST',
-//         url:'/predict',
-//         data:{
-//           dataToDisplay
-          // experience:$("#todo").val(),
-          // test_score:$("#todo").val(),
-          // interview_score:$("#todo").val(),
+			},
+			type : 'POST',
+			url : '/predict'
+		})
+		.done(function(data) {
 
+			
+				$('#predictionResult').text(data.number).show();
+			
+			
 
+		});
 
-    //     },
-    //     success:function()
-    //     {
-    //       $("#results").append(html);
-    //     }
-    //   })
-    // });
+		event.preventDefault();
 
-// function submitDetailsForm() {
-//     $.ajax({
-//           type:'POST',
-//           url:'/predict',
-//           data:{
-//             experience:$("#todo").val(),
-//             test_score:$("#todo").val(),
-//             interview_score:$("#todo").val(),
+	});
 
+});
 
-//           }
-//           })
-//       }
-
-// document.getElementById('post-form').addEventListener('submit', sendForm);
-        
-        
-//         function sendForm(e){
-        
-//             e.preventDefault();
-        
-//             var name = document.getElementById('daySelect').value;
-//             var params = {daySelect:name}
-        
-        
-//             var xhr = new XMLHttpRequest();
-        
-//             xhr.open('post', '/predict', true);
-//             xhr.setRequestHeader('Content-type', 'application/json'); 
-//             xhr.onload = function(){
-//                 console.log('Finally');
-//                 document.getElementById('changeit'),innerHTML= this.responseText;
-//             }
-//             xhr.send(JSON.stringify(params));
-        
-//         }
-        
-        
-        
 
 
 
