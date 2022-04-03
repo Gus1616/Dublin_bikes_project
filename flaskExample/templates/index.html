@@ -418,59 +418,6 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 
 <div class="container_predictions">
 <div class="login">
-	<h1>Plan the start of your journey</h1>
-
-     <!-- Main Input For Receiving Query to our ML -->
-    <form action="{{ url_for('predict')}}"method="post" id="todo-form">
-        <label for="daySelect">Select Day</label>
-        <select id="daySelect" name="experience" id="todo">
-            <option value="0">Monday</option>
-            <option value="1">Tuesday</option>
-            <option value="2">Wednesday</option>
-            <option value="3">Thursday</option>
-            <option value="4">Friday</option>
-            <option value="5">Saturday</option>
-            <option value="6">Sunday</option>
-        </select>
-        <br>
-        <label for="hourSelect">Select Hour</label>
-        <select id="hourSelect" name="test_score" id="todo">
-            <option value="0">12am</option>
-            <option value="5">5am</option>
-            <option value="6">6am</option>
-            <option value="7">7am</option>
-            <option value="8">8am</option>
-            <option value="9">9am</option>
-            <option value="10">10am</option>
-            <option value="11">11am</option>
-            <option value="12">12pm</option>
-            <option value="13">1pm</option>
-            <option value="14">2pm</option>
-            <option value="15">3pm</option>
-            <option value="16">4pm</option>
-            <option value="17">5pm</option>
-            <option value="18">6pm</option>
-            <option value="19">7pm</option>
-            <option value="20">8pm</option>
-            <option value="21">9pm</option>
-            <option value="22">10pm</option>
-            <option value="23">11pm</option> 
-        </select>
-        <br>
-        <label for="begin">Select Station</label>
-        <select name="interview_score" required="required" id="begin">
-            <option>Select a Station</option>
-        </select>
-        <button type="submit" onClick='submitDetailsForm()' id= "todo-form" class="btn btn-primary btn-block btn-large">Predict</button>
-    </form>
-    </div>
-    <div class="predictionResult"> {{ prediction_text }} </div>
-</div>
- 
-</div> 
-
-
-<div class="login">
 	<h1>Plan the end of your journey</h1>
 
      <!-- Main Input For Receiving Query to our ML -->
@@ -516,13 +463,13 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
         </select>
         <button type="submit" onClick='submitDetailsForm()' id= "todo-form" class="btn btn-primary btn-block btn-large">Predict</button>
     </form>
-
-   <br>
-   <br>
-   <div class="predictionResult"> {{ prediction_text_bikeStands }} </div> 
-
-</div> 
+    </div>
+    <div class="predictionResult"> {{ prediction_text_bikeStands }} </div>
 </div>
+ 
+</div> 
+
+
 
 <button onclick="darkMode()">
     Toggle dark mode
