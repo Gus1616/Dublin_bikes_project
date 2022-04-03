@@ -12,6 +12,8 @@ import numpy as np
 # pymysql.install_as_MySQLdb()
 app = Flask(__name__)
 model = pickle.load(open('model.pkl', 'rb'))
+model_bikeStands = pickle.load(open('model_stands.pkl', 'rb'))
+
 
 
 
@@ -97,6 +99,19 @@ def predict():
         output = round(prediction[0])
 
         return render_template('index.html', prediction_text='Number of predicited available bikes {}'.format(output))
+
+
+@app.route('/predict_bikestands', methods=['GET','POST'])
+def predict_bikestands():
+
+    
+        int_features = [int(x) for x in request.form.values()]
+        final_features = [np.array(int_features)]
+        prediction = model_bikeStands.predict(final_features)
+
+        output = round(prediction[0])
+
+        return render_template('index.html', prediction_text_bikeStands='Number of predicited bike stands {}'.format(output))
 
     
 

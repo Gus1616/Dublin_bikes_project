@@ -228,6 +228,8 @@ locationButton1.addEventListener("click", () => {
             // drop that is used for predictions:
             let stationDropdown = "<option value=\"" + station.number + "\">" + station.address + "</option>";
             document.getElementById("begin").innerHTML += stationDropdown;
+            document.getElementById("endJourney").innerHTML += stationDropdown;
+
 
             
 
