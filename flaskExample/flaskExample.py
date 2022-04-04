@@ -97,8 +97,8 @@ def predict():
         prediction = model.predict(final_features)
 
         output = round(prediction[0])
-
-        return render_template('index.html', prediction_text='Number of predicited available bikes {}'.format(output))
+       
+        return jsonify({'output':output})
 
 
 @app.route('/predict_bikestands', methods=['GET','POST'])
@@ -109,9 +109,9 @@ def predict_bikestands():
         final_features = [np.array(int_features)]
         prediction = model_bikeStands.predict(final_features)
 
-        output = round(prediction[0])
+        output2 = round(prediction[0])
 
-        return render_template('index.html', prediction_text_bikeStands='Number of predicited bike stands {}'.format(output))
+        return jsonify({'output2':output2})
 
     
 
