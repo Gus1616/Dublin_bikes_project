@@ -460,9 +460,9 @@ $(document).ready(function() {
 
 		$.ajax({
 			data : {
-				number : $('#daySelect').val(),
-        number2 : $('#hourSelect').val(),
-        number3 : $('#begin').val(),
+				day : $('#daySelect').val(),
+        hour : $('#hourSelect').val(),
+        station : $('#begin').val(),
 
 			},
 			type : 'POST',
@@ -471,7 +471,7 @@ $(document).ready(function() {
 		.done(function(data) {
 
 			
-				$('#predictionResult').text(data.number).show();
+				$('#predictionResult').text(data.output).show();
 			
 			
 

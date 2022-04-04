@@ -96,7 +96,7 @@ def predict():
 
         output = round(prediction[0])
        
-        return jsonify({'number':output})
+        return jsonify({'output':output})
 
     
 
