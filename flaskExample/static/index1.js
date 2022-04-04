@@ -471,7 +471,7 @@ $(document).ready(function() {
 		.done(function(data) {
 
 			
-				$('#predictionResult').text(data.output).show();
+				$('#predictionResult').text("Number of predicted bikes avaiable: " + data.output).show();
 			
 			
 
