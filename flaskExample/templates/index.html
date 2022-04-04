@@ -363,17 +363,19 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
  
     
     <div class="container">
+        <h3 style="text-align: center; font-weight: bold; color: #234a55; text-shadow: 0 0 10px rgba(0,0,0,0.3);">Plan Your Journey</h3>
+
     
     <div class="col-md-6">
         
         <!-- Journey planner code adapted from https://www.youtube.com/watch?v=UbCWoMf80PY -->
         <div class="login">
-            <h1>Plan the start of your journey</h1>
+            <h1>The start of your journey</h1>
         
              <!-- Main Input For Receiving Query to our ML -->
             <form action="{{ url_for('predict')}}"method="post" id="todo-form">
                 <label for="daySelect">Select Day</label>
-                <select id="daySelect" name="experience" id="todo">
+                <select id="daySelect" name="Day_select" id="todo">
                     <option value="0">Monday</option>
                     <option value="1">Tuesday</option>
                     <option value="2">Wednesday</option>
@@ -384,7 +386,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
                 </select>
                 <br>
                 <label for="hourSelect">Select Hour</label>
-                <select id="hourSelect" name="test_score" id="todo">
+                <select id="hourSelect" name="hour_selection" id="todo">
                     <option value="0">12am</option>
                     <option value="5">5am</option>
                     <option value="6">6am</option>
@@ -408,10 +410,10 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
                 </select>
                 <br>
                 <label for="begin">Select Station</label>
-                <select name="interview_score" required="required" id="begin">
+                <select name="selectStation" required="required" id="begin">
                     <option>Select a Station</option>
                 </select>
-                <button type="submit" onClick='submitDetailsForm()' id= "todo-form" class="btn btn-primary btn-block btn-large">Predict</button>
+                <button type="submit" onClick='submitDetailsForm()' id= "todo-form" class="btn btn-primary btn-block btn-large">Predict Bikes Available</button>
             </form>
             </div>
             <div class="predictionResult" id="predictionResult"></div> 
@@ -424,12 +426,12 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 
 <div class="container_predictions">
 <div class="login">
-	<h1>Plan the end of your journey</h1>
+	<h1>The end of your journey</h1>
 
      <!-- Main Input For Receiving Query to our ML -->
     <form action="{{ url_for('predict_bikestands')}}"method="post" id="todo-form">
         <label for="daySelect">Select Day</label>
-        <select id="daySelect2" name="experience" id="todo">
+        <select id="daySelect2" name="Day_select" id="todo">
             <option value="0">Monday</option>
             <option value="1">Tuesday</option>
             <option value="2">Wednesday</option>
@@ -440,7 +442,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
         </select>
         <br>
         <label for="hourSelect">Select Hour</label>
-        <select id="hourSelect2" name="test_score" id="todo">
+        <select id="hourSelect2" name="hour_selection" id="todo">
             <option value="0">12am</option>
             <option value="5">5am</option>
             <option value="6">6am</option>
@@ -464,10 +466,10 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
         </select>
         <br>
         <label for="begin">Select Station</label>
-        <select name="interview_score" required="required" id="endJourney">
+        <select name="selectStation" required="required" id="endJourney">
             <option>Select a Station</option>
         </select>
-        <button type="submit" onClick='submitDetailsForm()' id= "todo-form" class="btn btn-primary btn-block btn-large">Predict</button>
+        <button type="submit" onClick='submitDetailsForm()' id= "todo-form" class="btn btn-primary btn-block btn-large">Predict Bike Stands</button>
     </form>
     </div>
     <div class="predictionResult" id="predictionResult2">  </div>
@@ -477,11 +479,6 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
 
 
 
-<!-- <button onclick="darkMode()">
-    Toggle dark mode
-    <img src="https://css.gg/moon.css" width="20" />
-    <i class="fas fa-moon"></i>
-</button> -->
 
     
 <!-- Connecting to the flask app -->

@@ -224,8 +224,7 @@ locationButton1.addEventListener("click", () => {
             
           
 
-
-            // drop that is used for predictions:
+            // dropdown that is used for predictions:
             let stationDropdown = "<option value=\"" + station.number + "\">" + station.address + "</option>";
             document.getElementById("begin").innerHTML += stationDropdown;
             document.getElementById("endJourney").innerHTML += stationDropdown;
@@ -454,7 +453,7 @@ document.addEventListener('DOMContentLoaded', (e)=>{
 
 })
 
-
+// ajax code for loading predictions
 $(document).ready(function() {
 
 	$('form').on('submit', function(event) {
@@ -517,7 +516,7 @@ $(document).ready(function() {
    
 
 
-
+// function for changing web app to dark mode 
 function darkMode() {
   var element = document.body;
   element.classList.toggle("dark-mode");
