@@ -418,7 +418,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
                 <button type="submit" onClick='submitDetailsForm()' id= "todo-form" class="btn btn-primary btn-block btn-large">Predict</button>
             </form>
             </div>
-            <div class="predictionResult"> {{ prediction_text }} </div> 
+            <div class="predictionResult" id="predictionResult"></div> 
         </div>
         
      
@@ -433,7 +433,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
      <!-- Main Input For Receiving Query to our ML -->
     <form action="{{ url_for('predict_bikestands')}}"method="post" id="todo-form">
         <label for="daySelect">Select Day</label>
-        <select id="daySelect" name="experience" id="todo">
+        <select id="daySelect2" name="experience" id="todo">
             <option value="0">Monday</option>
             <option value="1">Tuesday</option>
             <option value="2">Wednesday</option>
@@ -444,7 +444,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
         </select>
         <br>
         <label for="hourSelect">Select Hour</label>
-        <select id="hourSelect" name="test_score" id="todo">
+        <select id="hourSelect2" name="test_score" id="todo">
             <option value="0">12am</option>
             <option value="5">5am</option>
             <option value="6">6am</option>
@@ -474,7 +474,7 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
         <button type="submit" onClick='submitDetailsForm()' id= "todo-form" class="btn btn-primary btn-block btn-large">Predict</button>
     </form>
     </div>
-    <div class="predictionResult"> {{ prediction_text_bikeStands }} </div>
+    <div class="predictionResult" id="predictionResult2">  </div>
 </div>
  
 </div> 

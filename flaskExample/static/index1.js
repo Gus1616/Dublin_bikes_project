@@ -455,77 +455,66 @@ document.addEventListener('DOMContentLoaded', (e)=>{
 })
 
 
+$(document).ready(function() {
 
-// $(document).on('submit','#todo-form',function(e)
-// $('#todo-form').submit(function (event) {
+	$('form').on('submit', function(event) {
 
-                   
-//       console.log('hello');
-//       event.preventDefault();
-//       var dataToDisplay = $("#todo-form").val();
-//       var dayCheck = $("#todo").val(),
-//       console.log(dayCheck);
+		$.ajax({
+			data : {
+				day : $('#daySelect').val(),
+        hour : $('#hourSelect').val(),
+        station : $('#begin').val(),
 
-//       console.log(dataToDisplay);
+			},
+			type : 'POST',
+			url : 'predict'
+		})
+		.done(function(data) {
 
-//       $.ajax({
-//         type:'POST',
-//         url:'/predict',
-//         data:{
-//           dataToDisplay
-          // experience:$("#todo").val(),
-          // test_score:$("#todo").val(),
-          // interview_score:$("#todo").val(),
+			
+				$('#predictionResult').text("Number of predicted bikes avaiable: " + data.output).show();
+			
+			
 
+		});
 
+		event.preventDefault();
 
-    //     },
-    //     success:function()
-    //     {
-    //       $("#results").append(html);
-    //     }
-    //   })
-    // });
+	});
 
-// function submitDetailsForm() {
-//     $.ajax({
-//           type:'POST',
-//           url:'/predict',
-//           data:{
-//             experience:$("#todo").val(),
-//             test_score:$("#todo").val(),
-//             interview_score:$("#todo").val(),
+});
+        
 
 
-//           }
-//           })
-//       }
+$(document).ready(function() {
 
-// document.getElementById('post-form').addEventListener('submit', sendForm);
-        
-        
-//         function sendForm(e){
-        
-//             e.preventDefault();
-        
-//             var name = document.getElementById('daySelect').value;
-//             var params = {daySelect:name}
-        
-        
-//             var xhr = new XMLHttpRequest();
-        
-//             xhr.open('post', '/predict', true);
-//             xhr.setRequestHeader('Content-type', 'application/json'); 
-//             xhr.onload = function(){
-//                 console.log('Finally');
-//                 document.getElementById('changeit'),innerHTML= this.responseText;
-//             }
-//             xhr.send(JSON.stringify(params));
-        
-//         }
-        
-        
-        
+	$('form').on('submit', function(event) {
+
+		$.ajax({
+			data : {
+				day2 : $('#daySelect2').val(),
+        hour2 : $('#hourSelect2').val(),
+        station2 : $('#endJourney').val(),
+
+			},
+			type : 'POST',
+			url : '/predict_bikestands'
+		})
+		.done(function(data) {
+
+			
+				$('#predictionResult2').text("Number of predicted bikes stands avaiable: " + data.output2).show();
+			
+			
+
+		});
+
+		event.preventDefault();
+
+	});
+
+});
+   
 
 
 
