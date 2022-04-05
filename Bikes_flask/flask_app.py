@@ -100,7 +100,7 @@ def predict():
        
         return jsonify({'output':output})
 
-
+# predicting bike stands
 @app.route('/predict_bikestands', methods=['GET','POST'])
 def predict_bikestands():
 
