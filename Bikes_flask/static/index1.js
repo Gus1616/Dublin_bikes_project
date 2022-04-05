@@ -122,14 +122,15 @@ locationButton1.addEventListener("click", () => {
             fill2 = ">";
             fill3 = "</option>";
 
-            table = "<table id = tableinfo>";
+            table = '<table id = tableinfo >';
             tableclose = "</table>";
 
-            tablerow = "<tr>";
+            tablerow = '<tr >';
             tablerowclose = "</tr>";
 
-            tabledata = "<td>";
-            tabledataclose = "</td>";
+            tabledata = '<td align="center" width= "450px"  >';
+            tabledataclose = "</td >";
+            tabledata_span = '<td colspan="3" align="center">'
             
             // banking and bonus are represented as 0 for no and 1 for yes .
             // these are changed into a more realable format.
@@ -171,7 +172,7 @@ locationButton1.addEventListener("click", () => {
             tablerowclose +
 
             tablerow + 
-            tabledata + "Location" + tabledataclose +   
+            tabledata_span + "Location" + tabledataclose +   
             tablerowclose + 
 
             tablerow + 
@@ -201,11 +202,11 @@ locationButton1.addEventListener("click", () => {
             tablerowclose +
 
             tablerow + 
-            tabledata + "Last Updated"+ tabledataclose + 
+            tabledata_span + "Last Updated"+ tabledataclose + 
             tablerowclose +
 
             tablerow + 
-            tabledata + formattedTime + tabledataclose + 
+            tabledata_span + formattedTime + tabledataclose + 
             tablerowclose + tableclose + "'" );
             
               
