@@ -154,6 +154,7 @@
         }
         .heading{
             padding-top: 30px;
+            text-align: center;
         }
 
         .news-ticker-h{
@@ -229,9 +230,7 @@ input {
 }
 input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgba(255,255,255,0.2); }
 
-/* .predictionResult {
-    /* border-style: ridge; */
-/* // } */ 
+
 
         
 
@@ -311,7 +310,6 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="{{ url_for('home') }}">Home</a></li>
                     <li><a href="{{ url_for('about') }}">About</a></li>
-                    <li><a href="{{ url_for('info_weather') }}">Weather</a></li>
                     <li class="contact"><a href="{{ url_for('contact') }}">Contact</a></li>
                     <li>
                     <button class = 'btn btn-default navbar-btn pull-right', onclick="darkMode()">

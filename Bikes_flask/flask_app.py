@@ -11,8 +11,8 @@ import numpy as np
 # import pymysql
 # pymysql.install_as_MySQLdb()
 app = Flask(__name__)
-model = pickle.load(open('Bikes_flask\model.pkl', 'rb'))
-model_bikeStands = pickle.load(open('Bikes_flask\model_stands.pkl', 'rb'))
+model = pickle.load(open('model.pkl', 'rb'))
+model_bikeStands = pickle.load(open('model_stands.pkl', 'rb'))
 
 
 
@@ -37,9 +37,7 @@ def home():
 def about():
     return render_template('about.html')
 
-@app.route("/info_weather")
-def info_weather():
-    return render_template('info_weather.html')
+
 
 
 @app.route("/contact")
