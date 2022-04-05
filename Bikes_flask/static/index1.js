@@ -211,7 +211,7 @@ locationButton1.addEventListener("click", () => {
             
               
           
-  
+  console.log(content_of_table)
              // the blank string text is filled with the required information
             // along with fill variables which represent the option html tag.
             // the textbox div is then populated with this string.
@@ -292,8 +292,8 @@ function table_populate() {
 // all floats from the table information and listed in indexselected_ints 
 // the firts of these is the stations latitude and the second is its longitude.
 // these are used to create a marker on the map.
-  var selected_station_lat = parseFloat(indexselected_ints[0]);
-  var selected_station_lng = (parseFloat(indexselected_ints[1])*-1);
+  var selected_station_lat = parseFloat(indexselected_ints[6]);
+  var selected_station_lng = (parseFloat(indexselected_ints[8])*-1);
   
   // each time a new station is clicked or if the nearest staion is 
   // selected all prior markers are removed before the new marker is placed. THese 
