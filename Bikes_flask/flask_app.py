@@ -47,8 +47,6 @@ def contact():
     return render_template('contact.html')
 
 
-
-# geting stations data from database for makers
 @app.route("/stations")
 def get_stations():
     engine = create_engine("mysql+mysqldb://{}:{}@{}:{}/{}".format(USER, PASSWORD, URL, PORT, DB), echo=True)
@@ -71,8 +69,6 @@ def get_stations():
     results = df.to_json(orient='records')
     return results
 
-
-# getting availability data from database
 @ app.route('/availability')
 def get_availability():
     engine = create_engine("mysql+mysqldb://{}:{}@{}:{}/{}".format(USER, PASSWORD, URL, PORT, DB), echo=True)
@@ -80,8 +76,6 @@ def get_availability():
     results = df.to_json(orient='records')
     return results
 
-
-# getting weather data
 @ app.route('/current_weather')
 def get_weather():
     engine = create_engine("mysql+mysqldb://{}:{}@{}:{}/{}".format(USER, PASSWORD, URL, PORT, DB), echo=True)
@@ -100,8 +94,6 @@ def predict():
     
         int_features = [int(x) for x in request.form.values()]
         final_features = [np.array(int_features)]
-        print("this is the array: ", final_features)
-
         prediction = model.predict(final_features)
 
         output = round(prediction[0])
@@ -115,7 +107,6 @@ def predict_bikestands():
     
         int_features = [int(x) for x in request.form.values()]
         final_features = [np.array(int_features)]
-        print("these are the final features", final_features)
         prediction = model_bikeStands.predict(final_features)
 
         output2 = round(prediction[0])
