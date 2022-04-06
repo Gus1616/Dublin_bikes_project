@@ -473,7 +473,7 @@ $(document).ready(function() {
 		.done(function(data) {
 
 			
-				$('#predictionResult').text("Number of predicted bikes avaiable: " + data.output).show();
+				$('#predictionResult').text("Number of predicted bikes available: " + data.output).show();
 			
 			
 
@@ -504,7 +504,7 @@ $(document).ready(function() {
 		.done(function(data) {
 
 			
-				$('#predictionResult2').text("Number of predicted bikes stands avaiable: " + data.output2).show();
+				$('#predictionResult2').text("Number of predicted bikes stands available: " + data.output2).show();
 			
 			
 
