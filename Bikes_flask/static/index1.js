@@ -122,14 +122,15 @@ locationButton1.addEventListener("click", () => {
             fill2 = ">";
             fill3 = "</option>";
 
-            table = "<table id = tableinfo>";
+            table = '<table id = tableinfo >';
             tableclose = "</table>";
 
-            tablerow = "<tr>";
+            tablerow = '<tr >';
             tablerowclose = "</tr>";
 
-            tabledata = "<td>";
-            tabledataclose = "</td>";
+            tabledata = '<td align="center" width= "450px"  >';
+            tabledataclose = "</td >";
+            tabledata_span = '<td colspan="3" align="center">'
             
             // banking and bonus are represented as 0 for no and 1 for yes .
             // these are changed into a more realable format.
@@ -171,7 +172,7 @@ locationButton1.addEventListener("click", () => {
             tablerowclose +
 
             tablerow + 
-            tabledata + "Location" + tabledataclose +   
+            tabledata_span + "Location" + tabledataclose +   
             tablerowclose + 
 
             tablerow + 
@@ -201,16 +202,16 @@ locationButton1.addEventListener("click", () => {
             tablerowclose +
 
             tablerow + 
-            tabledata + "Last Updated"+ tabledataclose + 
+            tabledata_span + "Last Updated"+ tabledataclose + 
             tablerowclose +
 
             tablerow + 
-            tabledata + formattedTime + tabledataclose + 
+            tabledata_span + formattedTime + tabledataclose + 
             tablerowclose + tableclose + "'" );
             
               
           
-  
+  console.log(content_of_table)
              // the blank string text is filled with the required information
             // along with fill variables which represent the option html tag.
             // the textbox div is then populated with this string.
@@ -291,8 +292,8 @@ function table_populate() {
 // all floats from the table information and listed in indexselected_ints 
 // the firts of these is the stations latitude and the second is its longitude.
 // these are used to create a marker on the map.
-  var selected_station_lat = parseFloat(indexselected_ints[0]);
-  var selected_station_lng = (parseFloat(indexselected_ints[1])*-1);
+  var selected_station_lat = parseFloat(indexselected_ints[6]);
+  var selected_station_lng = (parseFloat(indexselected_ints[8])*-1);
   
   // each time a new station is clicked or if the nearest staion is 
   // selected all prior markers are removed before the new marker is placed. THese 
