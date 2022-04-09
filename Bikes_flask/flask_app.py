@@ -1,11 +1,12 @@
 
 # from distutils.log import debug
+import json
 from flask import Flask, render_template, g, request, jsonify, url_for, redirect
 from sklearn.metrics import jaccard_score
 from sqlalchemy import create_engine
 import pandas as pd
 # import json
-import pickle
+# import pickle
 import numpy as np
 
 # import pymysql
@@ -111,7 +112,66 @@ def predict_bikestands():
 
         return jsonify({'output2':output2})
 
+
+@app.route("/occupancy/<int:station_id>")
+def get_occupancy(station_id):
+    engine = create_engine("mysql+mysqldb://{}:{}@{}:{}/{}".format(USER, PASSWORD, URL, PORT, DB), echo=True)
+    df = pd.read_sql_query("select * from availability where number = %(number)s", engine, params={"number":station_id})
+    df['last_update_date'] = pd.to_datetime(df.last_update, unit='ms')
+    df.set_index('last_update_date', inplace=True)
+    res = df['available_bike_stands'].resample('1d').mean()
+    #res['dt'] = df.index
+    print(res)
+    return jsonify(data=json.dumps(list(zip(map(lambda x: x.isoformat(), res.index), res.values))))
+ 
+@app.route("/available/<currentStation>")
+def getDayData(currentStation):
+    ''' Function returns data from the dynamic table, which will be used to create the daily charts on our app'''
+    # create a connection to our database
+    engine = create_engine("mysql+mysqldb://{}:{}@{}:{}/{}".format(USER, PASSWORD, URL, PORT, DB), echo=True)
     
+    dayData = []  
+    
+    conn = engine.connect()
+    
+    # for each day of the week...
+    for i in range (0,7):
+        
+        # SQL query returns average available bikes for a given day and station number
+        string = "SELECT AVG(available_bikes) FROM availability WHERE number = {} AND WEEKDAY(last_update)= {};".format(currentStation,i)
+        rows = conn.execute(string)
+        
+        for row in rows:
+            dayData.append(dict(row))
+    
+    # jsonify the array 
+    return jsonify(dayData)
+
+
+
+@app.route("/available/hourly/<currentStation>/<day>")
+def getHourlyData(currentStation, day):
+    engine = create_engine("mysql+mysqldb://{}:{}@{}:{}/{}".format(USER, PASSWORD, URL, PORT, DB), echo=True)
+    
+    hourlyData = []
+    
+    conn = engine.connect()
+    
+    # for every hour of the day between 5am and 11pm (thats when the stations are open)
+    for i in range (5,24):
+        
+        # SQL query returns average available bikes for a given hour in a day and station number
+        string = "SELECT AVG(available_bikes) FROM availability WHERE number =  {} AND EXTRACT(HOUR FROM last_update) = {} AND WEEKDAY(last_update)= {};".format(currentStation,i,day)
+        rows = conn.execute(string)
+        
+        for row in rows:
+            hourlyData.append(dict(row))
+    
+    # jsonify the array       
+    return jsonify(hourlyData)
+
+
+
 
 if __name__== "__main__":
     app.run(debug=True)
