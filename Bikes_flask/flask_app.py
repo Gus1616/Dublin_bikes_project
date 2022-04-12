@@ -75,6 +75,15 @@ def get_availability():
     results = df.to_json(orient='records')
     return results
 
+
+@ app.route('/availability')
+def get_availability2():
+    engine = create_engine("mysql+mysqldb://{}:{}@{}:{}/{}".format(USER, PASSWORD, URL, PORT, DB), echo=True)
+    df = pd.read_sql_table("availability", engine)
+    results = df.to_json(orient='records')
+    return results
+
+
 @ app.route('/current_weather')
 def get_weather():
     engine = create_engine("mysql+mysqldb://{}:{}@{}:{}/{}".format(USER, PASSWORD, URL, PORT, DB), echo=True)
@@ -116,7 +125,7 @@ def predict_bikestands():
 @app.route("/occupancy/<int:station_id>")
 def get_occupancy(station_id):
     engine = create_engine("mysql+mysqldb://{}:{}@{}:{}/{}".format(USER, PASSWORD, URL, PORT, DB), echo=True)
-    df = pd.read_sql_query("select * from availability_app where number = %(number)s", engine, params={"number":station_id})
+    df = pd.read_sql_query("select * from availability where number = %(number)s", engine, params={"number":station_id})
     df['last_update_date'] = pd.to_datetime(df.last_update, unit='ms')
     df.set_index('last_update_date', inplace=True)
     res = df['available_bike_stands'].resample('1d').mean()
@@ -138,7 +147,7 @@ def getDayData(currentStation):
     for i in range (0,7):
         
         # SQL query returns average available bikes for a given day and station number
-        string = "SELECT AVG(available_bikes) FROM availability_app WHERE number = {} AND WEEKDAY(last_update)= {};".format(currentStation,i)
+        string = "SELECT AVG(available_bikes) FROM availability WHERE number = {} AND WEEKDAY(last_update)= {};".format(currentStation,i)
         rows = conn.execute(string)
         
         for row in rows:
@@ -161,7 +170,7 @@ def getHourlyData(currentStation, day):
     for i in range (5,24):
         
         # SQL query returns average available bikes for a given hour in a day and station number
-        string = "SELECT AVG(available_bikes) FROM availability_app WHERE number =  {} AND EXTRACT(HOUR FROM last_update) = {} AND WEEKDAY(last_update)= {};".format(currentStation,i,day)
+        string = "SELECT AVG(available_bikes) FROM availability WHERE number =  {} AND EXTRACT(HOUR FROM last_update) = {} AND WEEKDAY(last_update)= {};".format(currentStation,i,day)
         rows = conn.execute(string)
         
         for row in rows:
