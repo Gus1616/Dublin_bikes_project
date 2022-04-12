@@ -230,6 +230,7 @@ locationButton1.addEventListener("click", () => {
             let stationDropdown = "<option value=\"" + station.number + "\">" + station.address + "</option>";
             document.getElementById("begin").innerHTML += stationDropdown;
             document.getElementById("endJourney").innerHTML += stationDropdown;
+            
 
 
             
