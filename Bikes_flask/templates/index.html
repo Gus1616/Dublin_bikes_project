@@ -164,7 +164,7 @@
 	        content: "";
 	        position: absolute;
 	        top: 0;
-	        border-left: 20px solid #234a55;;
+	        border-left: 20px solid #234a55;
 	        border-top: 17px solid transparent;
 	        border-bottom: 15px solid transparent;
         }
@@ -220,7 +220,7 @@
 	height:400px;
 }
 
-.login h1 { color:#234a55; text-shadow: 0 0 10px rgba(0,0,0,0.3); letter-spacing:1px; text-align:center; }
+.login h1 { color:#234a55; text-shadow: 0 0 10px rgba(0,0,0,0.3);  text-align:center; }
 #heading1 {
     font-size: 60px;
     padding: 25px;
@@ -500,7 +500,40 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
  
 </div> 
 
+<!-- Charts code for weeky data -->
+<script src="https://www.gstatic.com/charts/loader.js"></script>
 
+
+<h3 style="text-align: center; font-weight: bold; color: #234a55; text-shadow: 0 0 10px rgba(0,0,0,0.3);">Google charts information<br> <br>To get more information on a certain location on a weeekly timeframe<br> please select below</h3>
+<br>
+
+<select name="selectStation" required="required" id="endJourney1" onmousedown="this.value='';" onchange="createChart(this.value);"></select>
+<br>
+<div id = "chart" ></div>  
+
+
+
+<br>
+<h3 style="text-align: center; font-weight: bold; color: #234a55; text-shadow: 0 0 10px rgba(0,0,0,0.3);">To get more information on a certain location on a hourly timeframe<br> please select below</h3>
+<br>
+<form>
+    <label for="daySelect">Select Day</label>
+    <select id="select1" name="Day_select" id="todo">
+        <option value="0">Monday</option>
+        <option value="1">Tuesday</option>
+        <option value="2">Wednesday</option>
+        <option value="3">Thursday</option>
+        <option value="4">Friday</option>
+        <option value="5">Saturday</option>
+        <option value="6">Sunday</option>
+    </select>
+    <select name="selectStation" required="required" id="endJourney2"></select>
+        </form>
+    
+    <button onclick="getOption()"> Check option </button>
+    <br>
+    <br>
+    <div id = "hourlychart" ></div>  
 
 
     

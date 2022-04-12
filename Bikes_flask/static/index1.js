@@ -96,6 +96,7 @@ locationButton1.addEventListener("click", () => {
 // fetch function to get stations data 
 
     fetch("/stations").then(response => {
+
         return response.json();
     }).then((json) => {
       // looping through each station then adding data to the map
@@ -211,7 +212,7 @@ locationButton1.addEventListener("click", () => {
             
               
           
-  console.log(content_of_table)
+  // console.log(content_of_table)
              // the blank string text is filled with the required information
             // along with fill variables which represent the option html tag.
             // the textbox div is then populated with this string.
@@ -233,6 +234,13 @@ locationButton1.addEventListener("click", () => {
             
 
 
+            let stationDropdown1 = "<option value=\"" + station.number + "\">" + station.address + "</option>";
+            document.getElementById("begin").innerHTML += stationDropdown;
+            document.getElementById("endJourney1").innerHTML += stationDropdown;
+            document.getElementById("endJourney2").innerHTML += stationDropdown;
+
+
+
             
 
             // console.log('station', station);
@@ -252,7 +260,7 @@ locationButton1.addEventListener("click", () => {
                 
             })
         var displayInfo = "<h3>" + station.address + "</br>" + "</h3>Bikes Available : " + station.available_bikes + "</br>Bike Stands Free : " + station.available_bike_stands;
-
+        
 
         // Generate infoWindow
         makeClickable(map, circle, displayInfo);
@@ -526,9 +534,179 @@ function darkMode() {
 }
 
 
+// GOOGLE CHARTS SECTION
+// ###############################################
+// ###############################################
+// ###############################################
+// ###############################################
 
 
+createChart(12)
+createHourlyChart(5,5)
 
+function createChart(currentStation){
+        
   
+  var xmlhttp = new XMLHttpRequest();
+        var url = "/available/" + currentStation;
+        
+        google.charts.load('current', {packages: ['corechart']});
+        // google.charts.setOnLoadCallback(drawWeeklyChart);
+        console.log(url);
+        xmlhttp.onreadystatechange = function() {
+            if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+                var data = JSON.parse(xmlhttp.response);
+                console.log('data', data);
+                drawWeeklyChart(data);
+                }
+            };
+        xmlhttp.open("GET",url, true);
+        xmlhttp.send();
+
+
+}
+
+function drawWeeklyChart(data) {      
+  
+  var data = google.visualization.arrayToDataTable([
+    ['Day', 'No. of Bikes'],
+    ['Monday', Math.round(data[1]["AVG(available_bikes)"])],
+    ['Tuesday',  Math.round(data[2]["AVG(available_bikes)"])],
+    ['Wednesday',   Math.round(data[3]["AVG(available_bikes)"])],
+    ['Thursday',  Math.round(data[4]["AVG(available_bikes)"])],
+    ['Friday',  Math.round(data[5]["AVG(available_bikes)"])],
+    ['Saturday',  Math.round(data[6]["AVG(available_bikes)"])],
+    ['Sunday',  Math.round(data[0]["AVG(available_bikes)"])]
+  ]);
+
+      var options = {
+        title: 'Daily Avg. Bike Availability',
+        vAxis: {minValue: 0},
+        backgroundColor:{  
+              fill: 'ghostwhite',
+              stroke: '#000',
+              strokeWidth: 3
+          },
+        legend: { position: 'bottom' },
+        animation: {
+              duration: 750,
+              startup: true 
+          }
+      };
+
+      var chart = new google.visualization.LineChart(document.getElementById('chart'));
+      chart.draw(data, options);
+}
+
+function sleep(ms) {
+  return new Promise(resolve => setTimeout(resolve, ms));
+}
+function getOption() {
+
+  var e = document.getElementById("select1");
+  var strUser = e.value;
+  console.log(strUser);
+
+  var x1 = document.getElementById("endJourney2");
+  var strUser1 = x1.value;
+
+  // selectElement = document.querySelector('#select1');
+  // output = selectElement.value;
+  // document.querySelector('.output').textContent = output;
+
+  // selectElement = document.querySelector('#daySelect2');
+  // output = selectElement.value;
+  // document.querySelector('.output').textContent = output1;
+
+  createHourlyChart(strUser1,strUser)
+
+}
+// var jqxhr = $.getJSON($SCRIPT_ROOT + "/occupancy/" + marker.station_number,
+// function(data) {
+// data = JSON.parse(data.data);
+// console.log('data', data);
+// var node = document.createElement('div'),
+// infowindow = new google.maps.InfoWindow(),
+// chart = new google.visualization.ColumnChart(node);
+// var chart_data = new google.visualization.DataTable();
+// chart_data.addColumn('datetime', 'Time of Day');
+// chart_data.addColumn('number', '#');
+// _.forEach(data, function(row){
+// chart_data.addRow([new Date(row[0]), row[1]]);
+// })
+// chart.draw(chart_data, options);
+// infowindow.setContent(node);
+// infowindow.open(marker.getMap(), marker);
+// }).fail(function() {
+// console.log( "error" );
+// })
+function createHourlyChart(currentStation,day){
+  // day = 0;
+  var xmlhttp = new XMLHttpRequest();
+  console.log(currentStation,day)
+  var url = "/available/hourly/" + currentStation + "/" + day;
+  
+  google.charts.load('current', {packages: ['corechart']});
+  // google.charts.setOnLoadCallback(drawHourlyChart);
+  console.log(url);
+  xmlhttp.onreadystatechange = function() {
+      if (xmlhttp.readyState == 4 && xmlhttp.status == 200) {
+          var data = JSON.parse(xmlhttp.response);
+          console.log('data', data);
+          drawHourlyChart(data);
+          }
+      };
+  xmlhttp.open("GET",url, true);
+  xmlhttp.send();
+};
+
+
+//Function to create a chart based on the average hourly bikes for each hour for a selected station on the selected day
+function drawHourlyChart(data) {
+    
+
+// Creates the weekly charts with a blue line for average
+  var data = google.visualization.arrayToDataTable([
+       ['Day', 'No. of Bikes'],
+       ['5am', Math.round(data[0]["AVG(available_bikes)"])],
+       ['6am', Math.round(data[1]["AVG(available_bikes)"])],
+       ['7am', Math.round(data[2]["AVG(available_bikes)"])],
+       ['8am', Math.round(data[3]["AVG(available_bikes)"])],
+       ['9am', Math.round(data[4]["AVG(available_bikes)"])],
+       ['10am', Math.round(data[5]["AVG(available_bikes)"])],
+       ['11am', Math.round(data[6]["AVG(available_bikes)"])],
+       ['12pm', Math.round(data[7]["AVG(available_bikes)"])],
+       ['1pm', Math.round(data[8]["AVG(available_bikes)"])],
+       ['2pm', Math.round(data[9]["AVG(available_bikes)"])],
+       ['3pm', Math.round(data[10]["AVG(available_bikes)"])],
+       ['4pm', Math.round(data[11]["AVG(available_bikes)"])],
+       ['5pm', Math.round(data[12]["AVG(available_bikes)"])],
+       ['6pm', Math.round(data[13]["AVG(available_bikes)"])],
+       ['7pm', Math.round(data[14]["AVG(available_bikes)"])],
+       ['8pm', Math.round(data[15]["AVG(available_bikes)"])],
+       ['9pm', Math.round(data[16]["AVG(available_bikes)"])],
+       ['10pm', Math.round(data[17]["AVG(available_bikes)"])],
+       ['11pm', Math.round(data[18]["AVG(available_bikes)"])]
+  ]);
+
+  var options = {
+    title: 'Hourly Avg. Bike Availability',
+      backgroundColor:{  
+          fill: 'ghostwhite',
+          stroke: '#000',
+          strokeWidth: 3
+      },
+    vAxis: {minValue: 0,
+           gridlines: {count:7}},
+    legend: { position: 'bottom' },
+    animation: {
+          duration: 750,
+          startup: true 
+      }                
+  };
+
+  var chart = new google.visualization.LineChart(document.getElementById('hourlychart'));
+  chart.draw(data, options);
+}
 
  
