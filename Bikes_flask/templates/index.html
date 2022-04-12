@@ -23,7 +23,7 @@
         /* Always set the map height explicitly to define the size of the div
        * element that contains the map. */
        .custom-map-control-button,.custom-map-control-button1 {
-        background-color: #454545;
+        background-color: rgb(69, 69, 69);
         color: #FFFFFF;
         padding: 10px;
         width: 110px;
@@ -329,7 +329,6 @@ input:focus { box-shadow: inset 0 -5px 45px rgba(100,100,100,0.4), 0 1px 1px rgb
                 <ul class="nav navbar-nav">
                     <li class="active"><a href="{{ url_for('home') }}">Home</a></li>
                     <li><a href="{{ url_for('about') }}">About</a></li>
-                    <li class="contact"><a href="{{ url_for('contact') }}">Contact</a></li>
                     <li>
                     <button class = 'btn btn-default navbar-btn pull-right', onclick="darkMode()">
                         Toggle dark mode

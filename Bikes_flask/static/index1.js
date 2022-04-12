@@ -31,7 +31,7 @@ function initMap() {
 
   locationButton.textContent = "Pan to Current Location";
   locationButton.classList.add("custom-map-control-button");
-  map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton);
+  map.controls[google.maps.ControlPosition.LEFT_CENTER].push(locationButton);
   locationButton.addEventListener("click", () => {
     // Try HTML5 geolocation.
     if (navigator.geolocation) {
@@ -60,7 +60,7 @@ function initMap() {
 const locationButton1 = document.createElement("button");
 locationButton1.textContent = "Nearest location";
 locationButton1.classList.add("custom-map-control-button1");
-map.controls[google.maps.ControlPosition.TOP_CENTER].push(locationButton1);
+map.controls[google.maps.ControlPosition.LEFT_CENTER].push(locationButton1);
 locationButton1.addEventListener("click", () => {
   // Try HTML5 geolocation.
   if (navigator.geolocation) {
