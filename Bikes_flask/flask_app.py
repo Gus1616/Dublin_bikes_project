@@ -1,5 +1,4 @@
 
-# from distutils.log import debug
 from flask import Flask, render_template, g, request, jsonify, url_for, redirect
 from sklearn.metrics import jaccard_score
 from sqlalchemy import create_engine
@@ -11,11 +10,8 @@ import numpy as np
 # import pymysql
 # pymysql.install_as_MySQLdb()
 app = Flask(__name__)
-model = pickle.load(open('Bikes_flask\model_stands.pkl', 'rb'))
-model_bikeStands = pickle.load(open('Bikes_flask\model_stands.pkl', 'rb'))
-
-
-
+# model = pickle.load(open('flaskExample\model.pkl', 'rb'))
+# model_bikeStands = pickle.load(open('Bikes_flask\model_stands.pkl', 'rb'))
 
 
 
