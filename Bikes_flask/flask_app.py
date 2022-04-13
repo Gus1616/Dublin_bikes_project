@@ -166,6 +166,7 @@ def getHourlyData(currentStation, day):
         
         # SQL query returns average available bikes for a given hour in a day and station number
         string = "SELECT AVG(available_bikes) FROM availability WHERE number =  {} AND EXTRACT(HOUR FROM last_update) = {} AND WEEKDAY(last_update)= {};".format(currentStation,i,day)
+        
         rows = conn.execute(string)
         
         for row in rows:
