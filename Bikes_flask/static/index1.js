@@ -235,7 +235,6 @@ locationButton1.addEventListener("click", () => {
 
 
             let stationDropdown1 = "<option value=\"" + station.number + "\">" + station.address + "</option>";
-            document.getElementById("begin").innerHTML += stationDropdown;
             document.getElementById("endJourney1").innerHTML += stationDropdown;
             document.getElementById("endJourney2").innerHTML += stationDropdown;
 
@@ -526,12 +525,42 @@ $(document).ready(function() {
 });
    
 
-
+var state = false;
 
 function darkMode() {
+
   var element = document.body;
-  element.classList.toggle("dark-mode");
+  element.classList.toggle("dark-mode")
+
+  if (state == false) {
+    // stuff for 'playnow' action
+
+    state = true;
+    document.getElementById("footerTest").style.backgroundColor="Black";
+
 }
+
+else {
+
+    state = false;
+    document.getElementById("footerTest").style.backgroundColor="White";
+
+}
+
+  ;
+
+  // var hello = document.getElementById("footerTest").style.backgroundColor="Black";
+  // hello.classList.toggle("dark-mode");
+
+  
+  // document.getElementById("footerTest").style.backgroundColor="Black";
+  // document.getElementsByClassName("container").style.backgroundColor="Black";
+}
+
+
+
+
+    
 
 
 // GOOGLE CHARTS SECTION
