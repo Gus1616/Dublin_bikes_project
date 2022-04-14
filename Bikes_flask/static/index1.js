@@ -38,12 +38,16 @@ function initMap() {
       navigator.geolocation.getCurrentPosition(
         (position) => {
           const pos = {
-            lat: position.coords.latitude,
-            lng: position.coords.longitude,
+
+            lat: 53.309759581601426,
+            lng:  -6.224535462364545,
+            
+            // lat: position.coords.latitude,
+            // lng: position.coords.longitude,
           };
 
           infoWindow.setPosition(pos);
-          infoWindow.setContent("Location found.");
+          infoWindow.setContent("You are here!");
           infoWindow.open(map);
           map.setCenter(pos);
         },
@@ -54,6 +58,7 @@ function initMap() {
     } else {
       // Browser doesn't support Geolocation
       handleLocationError(false, infoWindow, map.getCenter());
+      
     }
   });
 // NEW code to get current location for second button
@@ -67,8 +72,10 @@ locationButton1.addEventListener("click", () => {
     navigator.geolocation.getCurrentPosition(
       (position) => {
         const pos = {
-          lat: position.coords.latitude,
-          lng: position.coords.longitude,
+          // lat: position.coords.latitude,
+          // lng: position.coords.longitude,
+          lat: 53.309759581601426,
+          lng:  -6.224535462364545,
         };
         find_closest_marker(position.coords.latitude, position.coords.longitude)
         console.log('In')
