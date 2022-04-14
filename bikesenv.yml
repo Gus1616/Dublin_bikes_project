@@ -1,0 +1,13 @@
+name: dublinbikes
+channels:
+  - defaults
+dependencies:
+  - python=3.9
+  - flask
+  - scikit-learn
+  - sqlalchemy
+  - pandas
+  - simplejson
+  - requests
+  - ipython
+prefix: C:\Users\michael\anaconda3\envs\dublinbikes
