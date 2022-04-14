@@ -11,10 +11,10 @@ import numpy as np
 # pymysql.install_as_MySQLdb()
 app = Flask(__name__)
 
-with open('flaskExample\model.pkl', 'rb') as file:
+with open('model.pkl', 'rb') as file:
     model = pickle.load(file)
 
-with open('Bikes_flask\model_stands.pkl', 'rb') as fileStands:
+with open('model_stands.pkl', 'rb') as fileStands:
     model_bikeStands = pickle.load(fileStands)
 
 
