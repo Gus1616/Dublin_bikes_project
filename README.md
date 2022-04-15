@@ -53,5 +53,5 @@ Credits
 
 Information was used from Dublinbikes_ and the JCDecauxAPI_.
 
-.. _Dublinbikes: http://www.dublinbikes.ie
-.. _JCDecauxAPI: https://developer.jcdecaux.com/#/home
+- Dublinbikes: http://www.dublinbikes.ie
+- JCDecauxAPI: https://developer.jcdecaux.com/#/home
