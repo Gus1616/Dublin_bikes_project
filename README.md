@@ -8,6 +8,9 @@
 
 Dublin Bikes - Real time Information
 ===========
+
+Link to instance - http://34.252.137.171:5000/
+
 **Team Members**
 
 * Gus Boothman
@@ -19,7 +22,6 @@ Dublin Bikes - Real time Information
 
 ## What is it?
 
-![Coding at the whiteboard - from HBO's Silicon Valley](https://d3j2pkmjtin6ou.cloudfront.net/coding-at-the-whiteboard-silicon-valley.png)
 
 About
 --------
