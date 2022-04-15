@@ -1,3 +1,4 @@
+[![forthebadge made-with-python](http://ForTheBadge.com/images/badges/made-with-python.svg)](https://www.python.org/)
 
 Dublin Bikes - Real time Information
 ===========
@@ -45,6 +46,15 @@ necessary information and provide more options.
 
 .. _localhost:5000: localhost:5000/
 
+
+Built with
+-------
+https://img.shields.io/badge/Visual_Studio_Code-0078D4?style=for-the-badge&logo=visual%20studio%20code&logoColor=white
+https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E
+https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=white
+https://img.shields.io/badge/Bootstrap-563D7C?style=for-the-badge&logo=bootstrap&logoColor=white
+https://img.shields.io/badge/Amazon_AWS-FF9900?style=for-the-badge&logo=amazonaws&logoColor=white
+https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white
 
 Credits
 -------
