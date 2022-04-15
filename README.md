@@ -1,7 +1,6 @@
 # Dublin_bikes_project
 
 
-===========
 Dublin Bikes - Real time Information
 ===========
 **Team Members**
