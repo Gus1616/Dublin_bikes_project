@@ -40,6 +40,7 @@ Extra features that are included are:
  - Find my Location
  - Nearest bike stand location
  - Plan my journey
+ - Dark Mode
 
 Installation
 -------
