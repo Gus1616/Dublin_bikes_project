@@ -25,9 +25,11 @@ About
 --------
 
 This is a web application designed to provide real time information for the availability of bikes at the stations
-around Dublin city. The user can see a map of all the stations as well as viewing the amount of bikes/stands available
+around Dublin. The user can see a map of all the stations as well as viewing the amount of bikes/stands available
 at each one. Weather information and average occupancy is also available to assist the user in planning a journey for
 a certain time of day.
+
+Google charts plugin allows the user to estimate when a certain location will be busy, this is done on an hourly timeframe and also a weekly time frame for a given bike stand
 
 Extra features that are included are:
  - Full screen mode
