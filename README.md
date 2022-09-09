@@ -9,7 +9,7 @@
 Dublin Bikes - Real time Information
 ===========
 
-Link to instance - http://34.252.137.171:5000/
+Link to instance - http://34.252.137.171:5000/  (taken down)
 
 **Group 7**
 
